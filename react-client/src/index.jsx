@@ -138,8 +138,10 @@ class App extends React.Component {
     })
   }
   signOut() {
+    FB.logout(function(response){
+      console.log('logged out');
+    })
     var auth2 = gapi.auth2.getAuthInstance();
-    console.log(auth2);
     auth2.signOut().then(function () {
       console.log('User signed out.');
     });
@@ -200,6 +202,7 @@ class App extends React.Component {
                 />}
         </div>
       </div>
+      
     )
   }
 }

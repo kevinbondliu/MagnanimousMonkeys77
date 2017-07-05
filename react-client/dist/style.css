@@ -50,3 +50,8 @@ p {
 .heading {
   margin-bottom: 48px;
 }
+
+.fb_iframe_widget {
+  margin-top: 20px;
+  display: block !important;
+}
