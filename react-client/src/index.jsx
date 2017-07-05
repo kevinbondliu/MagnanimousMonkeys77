@@ -137,6 +137,17 @@ class App extends React.Component {
       thumbValue: value
     })
   }
+  signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    console.log(auth2);
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+    console.log(this.state.view);
+    this.setState({
+      view: 'login'
+    })
+  }
 
 
   render () {
@@ -144,6 +155,9 @@ class App extends React.Component {
       <div>
         <nav className="navbar navbar-default navbar-static-top">
           <div className="container-fluid">
+          <button href="#" onClick={this.signOut.bind(this)}>
+            LogOut!
+          </button>
             <div className="navbar-header">
               <a className="navbar-brand">
                 <i className="fa fa-thumbs-o-up" aria-hidden="true"></i>
