@@ -22,7 +22,7 @@ class Login extends React.Component {
       <div className="row">
         <div className="col-xs-12 text-center">
           <GoogleLogin
-            clientId="430160456638-mmtpqlu3h8t0nkum0tlo167d492gvbmf.apps.googleusercontent.com"
+            clientId="663612425604-5tilrctspqjau1je9hgkq9h725gpjbp1.apps.googleusercontent.com"
             scope="profile email"
             buttonText="Login with Google"
             onSuccess={this.props.onSignIn}

@@ -4,10 +4,9 @@
 
 ## Team
 
-  - Rob St. Lezin
-  - Michael Clausen
-  - Shyan Kashani
-  - Chris Aaker
+  - Julia Wong
+  - Kevin Liu
+  - Jesse Reyes
 
 ## Table of Contents
 
@@ -44,29 +43,29 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 
 ##Documentation
 
-##Client Side 
+##Client Side
 
 Index.js
 
-This file is the entry point into the application where the es6 App Class exists. 
+This file is the entry point into the application where the es6 App Class exists.
 
 App Class
 
 Introduction
 
-The App class is a stateful react component. The App Class plays a key part in this application because it the highest point where state is maintained. The lower level components receive references to this state on the App Class via props. 
+The App class is a stateful react component. The App Class plays a key part in this application because it the highest point where state is maintained. The lower level components receive references to this state on the App Class via props.
 
 Helper Methods
 
 The App class contains helper methods which are used by the other components. Like state on the App class, it is also passed into child components via props.
 
 -componentDidMount
-Function will call once the App component mounts. It sets the state of the view for everyone to login. 
+Function will call once the App component mounts. It sets the state of the view for everyone to login.
 
 -onSignIn
-Function will initiate Google Auth. The tokenId will be sent to the server, resulting in an asynch response with a user_type property on it. Based on what the value is determines how the view property on the App Class state will be set. 
+Function will initiate Google Auth. The tokenId will be sent to the server, resulting in an asynch response with a user_type property on it. Based on what the value is determines how the view property on the App Class state will be set.
 
-For users assigned as Instructors in the back end. The client will also send a socket event to the server called instructor. 
+For users assigned as Instructors in the back end. The client will also send a socket event to the server called instructor.
 
 - startLecture
 Function changes the status of a lecture to lectureStarted, thereby changing the view for the Student and the Instructor
@@ -81,12 +80,12 @@ Function is called from the Student component in response to a lectureEnded sock
 Function starts the countdown timer. It can be called from the startThumbsCheck function as a callback inside of setState once the state has changed.
 
 -clearCountdownInterval
-Function resets the countdown timer. NOTE: ClearInterval is necessary to end the interval properly. It changes the lectureStatus to lecture started and resets the countdown timer to where it needs to be. 
+Function resets the countdown timer. NOTE: ClearInterval is necessary to end the interval properly. It changes the lectureStatus to lecture started and resets the countdown timer to where it needs to be.
 
 -startThumbsCheck
 absolete
 
--clearThumbsCheck 
+-clearThumbsCheck
 Function can be called from the ThumbsChecker component to change the lectureStatus state to lectureStarted and resets the countdown
 
 -changeThumbValue
@@ -99,11 +98,11 @@ For the Instructor it can be called in response to a averageThumbValue socket ev
 
 	}
 
-For the Student it can be called from the ThumbInput component which changes the top level App Class thumbValue state. 
+For the Student it can be called from the ThumbInput component which changes the top level App Class thumbValue state.
 
-Render 
+Render
 
-Depending on whether the user is registered as a Student or an Instructor in the backend will determine which Component is rendered. 
+Depending on whether the user is registered as a Student or an Instructor in the backend will determine which Component is rendered.
 
 
 Student View
@@ -112,7 +111,7 @@ Will register Socket IO event listeners inside the constructor. Callback functio
 
 Instructor View
 
-Will register a single Socket IO event listener, the changeThumbValue event, and whose callback will invoke a method on the props object. 
+Will register a single Socket IO event listener, the changeThumbValue event, and whose callback will invoke a method on the props object.
 
 lectureButtons.jsx
 
@@ -122,12 +121,12 @@ Function is called once Check Thumbs button is clicked. It sends a post request 
 lectureStart.jsx
 
 -handleChange
-Function updates the name property on the App Class state which changes the name of the lecture. 
+Function updates the name property on the App Class state which changes the name of the lecture.
 
 -onLectureStart
 Function creates a new lecture with the App Class state name property. It sends a post request to the server creating a new lecture in the database. Once that is done, the response back from the server will be a new lectureId. The startLecture function will be executed with the lectureId coming back from the server.
 
-###Server Side 
+###Server Side
 
 Endpoints
 
@@ -152,7 +151,7 @@ Create a new question in the database. Once added to the database then create a 
  Listen for a username event. Put the username on each socket that is connected.
 
  'instructor'
- Listen for an instructor event. Get the id property on the socket and assign it to an variable. Get the username property on the data object and assign it the instructor property of that particular socket. 
+ Listen for an instructor event. Get the id property on the socket and assign it to an variable. Get the username property on the data object and assign it the instructor property of that particular socket.
 
  'thumbValue'
  Listen from the thumbValue from the students. If student is not in the ThumbsData data structure then add a new one with proper username and socket id. After that, set the thumb value for the student. Calculate the average thumb value and emit it as a socket event called averageThumbValue.
@@ -188,7 +187,7 @@ Create a new question in the database. Once added to the database then create a 
  Create a new users record
 
 -asyncTimeout
-a promise returning function 
+a promise returning function
 
 
 ThumbsData.jsx
@@ -221,7 +220,7 @@ asyncTimeout
 
 
 Things to Be Aware About
-Any open window is an instance of a Socket. When testing it's recommended to close old instances open in the browser or else those instances will continue to try to reconnect. 
+Any open window is an instance of a Socket. When testing it's recommended to close old instances open in the browser or else those instances will continue to try to reconnect.
 
 
 

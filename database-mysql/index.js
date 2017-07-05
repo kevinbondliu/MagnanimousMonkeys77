@@ -2,10 +2,10 @@ var mysql = require('mysql');
 
 var pool  = mysql.createPool({
   connectionLimit : 10,
-  host     : process.env.DB_HOST || 'localhost',
-  user     : process.env.DB_USERNAME || 'root',
-  password : process.env.DB_PASSWORD || 'plantlife',
-  database : process.env.DB_NAME || 'thumbscheck'
+  host     : 'localhost',
+  user     : 'root',
+  password : '',
+  database : 'thumbscheck'
 });
 
 
