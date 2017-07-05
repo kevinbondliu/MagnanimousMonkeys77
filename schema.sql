@@ -4,10 +4,10 @@ CREATE DATABASE IF NOT EXISTS thumbscheck;
 
 USE thumbscheck;
 
-DROP TABLE users;
-DROP TABLE thumbs;
-DROP TABLE questions;
-DROP TABLE lectures;
+DROP TABLE if exists users;
+DROP TABLE if exists thumbs;
+DROP TABLE if exists questions;
+DROP TABLE if exists lectures;
 
 CREATE TABLE users (
   id INT NOT NULL AUTO_INCREMENT,
@@ -51,7 +51,7 @@ INSERT INTO users (first_name, last_name, gmail, user_type) VALUES ("Mike", "Cla
 INSERT INTO users (first_name, last_name, gmail, user_type) VALUES ("Chris", "Aaker", "caaker.0@gmail.com", "STUDENT");
 INSERT INTO users (first_name, last_name, gmail, user_type) VALUES ("Robs", "Rent", "Stlezinrent@gmail.com", "INSTRUCTOR");
 INSERT INTO users (first_name, last_name, gmail, user_type) VALUES ("Shyan", "Instructor", "shyankashani1@gmail.com", "INSTRUCTOR");
-
+INSERT INTO users (first_name, last_name, gmail, user_type) VALUES ("Julia", "Wong", "juliawong05@gmail.com", "INSTRUCTOR");
 
 /*  Execute this file from the command line by typing:
  *    mysql -u root < thumbs.sql
