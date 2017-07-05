@@ -147,7 +147,7 @@ class App extends React.Component {
             <div className="navbar-header">
               <a className="navbar-brand">
                 <i className="fa fa-thumbs-o-up" aria-hidden="true"></i>
-                &nbsp; ThumbsCheck
+                &nbsp; Pollar
               </a>
             </div>
           </div>
