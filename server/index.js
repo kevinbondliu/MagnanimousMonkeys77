@@ -8,7 +8,7 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 //var data = require('./middleware/thumbsData.js');
 
-const port = process.env.PORT || 3000;
+const port = 3000;
 
 server.listen(port);
 
@@ -24,6 +24,7 @@ app.get('/login', (req, res) => {
   google.verifyToken(req.query.tokenId, '663612425604-5tilrctspqjau1je9hgkq9h725gpjbp1.apps.googleusercontent.com')
   .then(fromGoogle => {
     googleResults = fromGoogle;
+    console.log('hi-----');
     return db.getUserType(fromGoogle.gmail);
   })
   .then(result => {

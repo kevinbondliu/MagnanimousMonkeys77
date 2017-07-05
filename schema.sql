@@ -54,7 +54,7 @@ INSERT INTO users (first_name, last_name, gmail, user_type) VALUES ("Shyan", "In
 INSERT INTO users (first_name, last_name, gmail, user_type) VALUES ("Julia", "Wong", "juliawong05@gmail.com", "INSTRUCTOR");
 
 /*  Execute this file from the command line by typing:
- *    mysql -u root < thumbs.sql
+ *    mysql -u root < schema.sql
  *  to create the database and the tables.
  */
 
