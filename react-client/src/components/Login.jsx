@@ -1,5 +1,6 @@
 import React from 'react';
 import GoogleLogin from 'react-google-login';
+import FacebookLogin from 'react-facebook-login';
 
 class Login extends React.Component {
   constructor(props) {
@@ -7,17 +8,17 @@ class Login extends React.Component {
     this.state = { tokenId: '' };
   }
 
-  componentDidMount() {
-    console.log(this.props, 'didmount');
-  }
+  // componentDidMount() {
+  //   console.log(this.props, 'didmount');
+  // }
 
   responseGoogle(response) {
     console.log(this.props);
     console.log(response);
-    this.setState({ tokenId: response.tokenId})
+    this.setState({ tokenId: response.tokenId })
   }
 
-  render () {
+  render() {
     return (
       <div className="row">
         <div className="col-xs-12 text-center">
@@ -30,7 +31,14 @@ class Login extends React.Component {
             isSignedIn={true}
             className="btn btn-lg btn-danger"
           />
-          <div className="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" data-onlogin="checkLoginState()"></div>
+        </div>
+        <div className = "FacebookButton">
+        <FacebookLogin 
+          appId="184065032128462"
+          autoLoad={false}
+          fields="name,email"
+          icon="fa-facebook"
+          callback={this.props.onFBSignIn} />
         </div>
       </div>
     )

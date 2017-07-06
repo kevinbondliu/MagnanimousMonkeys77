@@ -51,7 +51,7 @@ p {
   margin-bottom: 48px;
 }
 
-.fb_iframe_widget {
-  margin-top: 20px;
-  display: block !important;
+.FacebookButton {
+    margin-top: 150px !important;
+    margin-left: 580px !important;
 }
