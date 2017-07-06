@@ -68,10 +68,10 @@ app.get('/FBlogin', (req, res) => {
         //add user to db
         console.log(`add user to db, ${req.query}`);
         if (req.query.role === 'STUDENT') {
-          return db.addStudent(googleResults.first, googleResults.last, googleResults.gmail);
+          return db.addStudent(req.query.firstName, req.query.lastName, req.query.email);
         }
         if (req.query.role === 'INSTRUCTOR') {
-          return db.addInstructor(googleResults.first, googleResults.last, googleResults.gmail);
+          return db.addInstructor(req.query.firstName, req.query.lastName, req.query.email);
         }
       } else {
         db.UpdateRole(req.query.role, req.query.email)

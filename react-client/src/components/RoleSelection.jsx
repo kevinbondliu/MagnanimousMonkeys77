@@ -25,7 +25,7 @@ class RoleSelection extends React.Component {
         <div>
           <span>
             <button className='student' value = {'STUDENT'} onClick = {(event) => {this.handleClick(event)}}>Student</button>
-            <button className='instructor' value = {'INSTRUCTOR'} onClick = {(event) => {this.handleClick(event)}}>instructor</button>
+            <button className='instructor' value = {'INSTRUCTOR'} onClick = {(event) => {this.handleClick(event)}}>Instructor</button>
           </span>
         </div>
       </div>
