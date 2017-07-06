@@ -12,12 +12,14 @@
 
 .form-control {
   margin-top: 24vh !important;
-  padding-top: 18px !important; padding-bottom: 18px !important;
+  padding-top: 18px !important;
+  padding-bottom: 18px !important;
 }
 
 .btn {
   border-radius: 96px !important;
-  padding-top: 6px !important; padding-bottom: 6px !important;
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
   width: 64vw !important;
   margin-top: 24vh !important;
 }
@@ -44,7 +46,8 @@
 
 p {
   margin-top: 24vh !important;
-  padding-top: 6px !important; padding-bottom: 6px !important;
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
 }
 
 .heading {
@@ -52,6 +55,6 @@ p {
 }
 
 .FacebookButton {
-    margin-top: 150px !important;
-    margin-left: 580px !important;
+  margin-left: 580px !important;
+  margin-top: 180px !important;
 }
