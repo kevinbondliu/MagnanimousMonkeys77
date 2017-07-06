@@ -18,12 +18,11 @@ CREATE TABLE users (
   PRIMARY KEY (ID)
 );
 
-CREATE TABLE thumbs (
+
+CREATE TABLE lectures (
   id INT NOT NULL AUTO_INCREMENT,
-  user_id INT NOT NULL,
-  question_id INT NOT NULL,
-  thumb_value INT NOT NULL,
-  timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  name VARCHAR(50) NOT NULL,
+  average_thumb_lecture DEC(4,2),
   PRIMARY KEY (ID)
 );
 
@@ -34,10 +33,12 @@ CREATE TABLE questions (
   PRIMARY KEY (ID)
 );
 
-CREATE TABLE lectures (
+CREATE TABLE thumbs (
   id INT NOT NULL AUTO_INCREMENT,
-  name VARCHAR(50) NOT NULL,
-  average_thumb_lecture DEC(4,2),
+  user_id INT NOT NULL,
+  question_id INT NOT NULL,
+  thumb_value INT NOT NULL,
+  timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (ID)
 );
 
@@ -53,6 +54,8 @@ INSERT INTO users (first_name, last_name, gmail, user_type) VALUES ("Robs", "Ren
 
 INSERT INTO users (first_name, last_name, gmail, user_type) VALUES ("Julia", "Wong", "juliawong05@gmail.com", "INSTRUCTOR");
 INSERT INTO users (first_name, last_name, gmail, user_type) VALUES ("Shyan", "Instructor", "shyankashani1@gmail.com", "INSTRUCTOR");
+INSERT INTO users (first_name, last_name, gmail, user_type) VALUES ("Jey", "Reyes", "jesselowellreyes@gmail.com", “INSTRUCTOR”);
+INSERT INTO users (first_name, last_name, gmail, user_type) VALUES ("Jesse", "Reyes", "jesselowellreyes1@gmail.com", "INSTRUCTOR");
 
 /*  Execute this file from the command line by typing:
  *    mysql -u root < schema.sql
