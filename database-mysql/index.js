@@ -4,12 +4,12 @@ var pool  = mysql.createPool({
   connectionLimit : 10,
   host     : 'localhost',
   user     : 'root',
-  password : '',
+  password : 'plantlife',
   database : 'thumbscheck'
 });
 
 
-console.log(`db connection: DB_HOST ${process.env.DB_HOST}, DB_USERNAME ${process.env.DB_USERNAME}, DB_PASSWORD ${process.env.DB_PASSWORD}, DB_NAME ${process.env.DB_NAME}`);
+console.log(`db connection: DB_HOST localhost, DB_USERNAME root, DB_PASSWORD plantlife, DB_NAME thumbscheck`);
 
 exports.getUserType = function(gmail) {
   return new Promise ((resolve, reject) => {
@@ -32,6 +32,30 @@ exports.createNewLecture = function(name) {
         resolve(results);
       }
     });
+  })
+}
+
+exports.deleteLecture = function(name) {
+  return new Promise ((resolve, reject) => {
+    pool.query(`DELETE FROM lectures where name = ("${name}")`, (err, results) => {
+      if (err) {
+        console.log(err);
+      } else {
+        resolve(results);
+      }
+    });
+  })
+}
+
+exports.lectureExists = function(lectureName) {
+  return new Promise ((resolve, reject) => {
+    pool.query(`SELECT * FROM LECTURES WHERE NAME = ("${lectureName}")`, (err, results) => {
+      if (err) {
+        console.log(err); 
+      } else {
+        resolve(results);
+      }
+    })
   })
 }
 
