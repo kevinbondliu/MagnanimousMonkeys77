@@ -7,7 +7,7 @@ class BarChart extends React.Component {
     super(props);
     this.state = {
       barChartData: {
-        labels: 'votes',
+        label: 'votes',
         labels: ['I DON\'T GET IT', 'thumbs30', 'thumbsMiddle', 'thumbs60', 'thumbsUp'],
         datasets: [
           {
@@ -25,6 +25,8 @@ class BarChart extends React.Component {
       <div className="barchart">
         <Bar
         data={this.state.barChartData}
+        width={10}
+        height={5}
         options={{
           title: {
             diplay:true,
