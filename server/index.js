@@ -84,6 +84,19 @@ app.post('/checkthumbs', (req, res) => {
   })
 })
 
+app.post('/checkLectures', (req, res) => {
+  let lecture = req.query.lectureName;
+  console.log('REQ BODY', lecture);
+  db.lectureExists(lecture).
+  then( result => {
+    if(result.length > 0) {
+      res.send('1');
+    } else {
+      res.send('0');
+    }
+  })
+})
+
 app.post('/endLecture', (req, res) => {
   let lecture = req.query.lectureId;
   // calculate the average for all thumbs in lecture
@@ -105,8 +118,24 @@ app.post('/endLecture', (req, res) => {
 });
 
 io.on('connection', function (socket) {
-  console.log(`socket: ${socket}`);
 
+  console.log(`socket: ${Object.keys(socket)}`);
+  //console.log(`rooms: ${socket._rooms}`);
+
+  socket.on('lectureName', function(data) {
+    console.log('lectureName', data);
+    socket.join(data.lecture);
+    //console.log(io.sockets.adapter.rooms);
+  })
+
+  socket.on('changeLecture', function(data){
+    console.log('DATA FOR LECTURE CHANGE', data);
+    socket.leave(data.currentLecture);
+    socket.join(data.newLecture);
+    console.log(io.sockets.adapter.rooms);
+  })
+  
+  //socket.join('Test Room');
   //put the gmail username on each socket that is connected
   socket.on('username', function(data) {
     console.log('username', data);
