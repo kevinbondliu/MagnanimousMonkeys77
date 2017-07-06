@@ -8,17 +8,23 @@ class BarChart extends React.Component {
     this.state = {
       barChartData: {
 <<<<<<< HEAD
+<<<<<<< HEAD
         labels: ['I DON\'T GET IT', 'NOT REALLY', 'NEUTRAL', 'I ALMOST GET IT', 'I GOT THIS!'],
         datasets: [
           {
             data: [5, 10, 8, 7, 9], // this.props.votes
 =======
+=======
+>>>>>>> origin
         labels: 'votes',
         labels: ['I DON\'T GET IT', 'thumbs30', 'thumbsMiddle', 'thumbs60', 'thumbsUp'],
         datasets: [
           {
             label: 'Votes',
             data: [5, 10, 8, 7, 9],
+<<<<<<< HEAD
+>>>>>>> origin
+=======
 >>>>>>> origin
             backgroundColor: ['rgba(255, 45, 45, 0.8)', 'rgba(51, 153, 255, 0.8)', 'rgba(255, 255, 102, 0.8)', 'rgba(153, 102, 255, 0.8)', 'rgba(75, 192, 192, 0.8)']
           }
@@ -34,6 +40,7 @@ class BarChart extends React.Component {
         data={this.state.barChartData}
         options={{
           title: {
+<<<<<<< HEAD
 <<<<<<< HEAD
             display: true,
             text: "Thumbs Range",
@@ -59,12 +66,17 @@ class BarChart extends React.Component {
             top: 40
             }
 =======
+=======
+>>>>>>> origin
             diplay:true,
             text:"Thumbs Range"
           },
           legend: {
             display: true,
             position:'right'
+<<<<<<< HEAD
+>>>>>>> origin
+=======
 >>>>>>> origin
           }
         }}
@@ -77,7 +89,11 @@ class BarChart extends React.Component {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 export default BarChart;
+=======
+export default BarChart;
+>>>>>>> origin
 =======
 export default BarChart;
 >>>>>>> origin
