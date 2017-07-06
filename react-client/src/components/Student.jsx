@@ -11,7 +11,6 @@ class Student extends React.Component {
     this.state = {};
 
     socket.on('lectureStarted', (data) => {
-      console.log('Testing a theory')
       props.startLecture(data.lectureId, data.lectureName);
     })
 
