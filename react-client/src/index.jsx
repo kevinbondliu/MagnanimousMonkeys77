@@ -221,19 +221,18 @@ class App extends React.Component {
             <div>
                 <nav className="navbar navbar-default navbar-static-top">
                     <div className="container-fluid">
-                        <button href="#" onClick={this.signOut.bind(this)}>
+                        <button className='logout' href="#" onClick={this.signOut.bind(this)}>
                             LogOut!
                         </button>
-                        <form onSubmit={this.handleLectureChange.bind(this)}>
+                        <form className='submitForm' onSubmit={this.handleLectureChange.bind(this)}>
                             Lecture Name:
                             <input type="text" ref={(input) => this.input = input} />
                             <input className="location-submit" type="submit" value="Search for Lecture" />
                         </form>
-                        <div>{this.state.lectureName}</div>
                         <div className="navbar-header">
                             <a className="navbar-brand">
                                 <i className="fa fa-thumbs-o-up" aria-hidden="true"></i>
-                                &nbsp; Thumblr
+                                Thumblr
                             </a>
                         </div>
                     </div>
