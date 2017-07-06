@@ -12,7 +12,7 @@ import PieChart from './PieChart.jsx';
 	 	return (
 		  <div className="col-xs-12 thumb-visualization text-center">
         <i style={{transform: `rotate(${(45 * this.props.thumbValue) - 180}deg)`, transition: "300ms ease all"}} className="fa fa-thumbs-o-up" aria-hidden="true"></i>
-        <BarChart width="100" height="50"/>
+        <BarChart />
         <PieChart />
 		  </div>
 	  );
