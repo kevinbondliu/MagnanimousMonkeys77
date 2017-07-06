@@ -7,7 +7,7 @@ class PieChart extends React.Component {
     super(props);
     this.state = {
       pieChartData: {
-        labels: 'votes',
+        label: 'votes',
         labels: ['I DON\'T GET IT', 'thumbs30', 'thumbsMiddle', 'thumbs60', 'thumbsUp'],
         datasets: [
           {
