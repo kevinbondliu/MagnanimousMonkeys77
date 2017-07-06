@@ -19,7 +19,7 @@ var instructorId = '';  // this will be the socket.id
 
 app.use(express.static(__dirname + '/../react-client/dist'));
 
-app.get('/login', (req, res) => {
+app.get('/googleLogin', (req, res) => {
   var googleResults;
   google.verifyToken(req.query.tokenId, '663612425604-5tilrctspqjau1je9hgkq9h725gpjbp1.apps.googleusercontent.com')
   .then(fromGoogle => {
@@ -41,6 +41,32 @@ app.get('/login', (req, res) => {
   .then(result => {
     console.log(result);
     return db.getUserType(googleResults.gmail);
+  })
+  .then(result => {
+    res.status(201).send(result);
+  })
+  .catch(err => {
+    console.log(err);
+  })
+})
+
+app.get('/FBlogin', (req, res) => {
+  console.log('this is the query', req.query);
+  db.getUserType(req.query.email)
+  .then(result => {
+    console.log(result);
+    if (result.length === 0) {
+      //add user to db
+      console.log(`add user to db, ${req.query}`);
+      return db.addStudent(req.query.firstName, req.query.lastName, req.query.email);
+    } else {
+      res.status(200).send(result);
+      throw ('early exit from promise chain');
+    }
+  })
+  .then(result => {
+    console.log(result);
+    return db.getUserType(req.query.email);
   })
   .then(result => {
     res.status(201).send(result);

@@ -50,3 +50,8 @@ p {
 .heading {
   margin-bottom: 48px;
 }
+
+.FacebookButton {
+    margin-top: 150px !important;
+    margin-left: 580px !important;
+}
