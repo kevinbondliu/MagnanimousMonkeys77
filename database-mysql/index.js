@@ -4,7 +4,7 @@ var pool  = mysql.createPool({
   connectionLimit : 10,
   host     : 'localhost',
   user     : 'root',
-  password : 'plantlife',
+  password : '',
   database : 'thumbscheck'
 });
 
@@ -142,6 +142,29 @@ exports.getUserId = function(gmail) {
 exports.addStudent = function(first, last, gmail) {
   return new Promise ((resolve, reject) => {
     pool.query(`INSERT INTO users (first_name, last_name, gmail, user_type) VALUES ("${first}", "${last}", "${gmail}", "STUDENT");`, (err, results) => {
+      if (err) {
+        console.log(err);
+      } else {
+        resolve(results);
+      }
+    });
+  })
+}
+exports.addInstructor = function(first, last, gmail) {
+  return new Promise ((resolve, reject) => {
+    pool.query(`INSERT INTO users (first_name, last_name, gmail, user_type) VALUES ("${first}", "${last}", "${gmail}", "INSTRUCTOR");`, (err, results) => {
+      if (err) {
+        console.log(err);
+      } else {
+        resolve(results);
+      }
+    });
+  })
+}
+
+exports.UpdateRole = function(role, email) {
+  return new Promise ((resolve, reject) => {
+    pool.query(`UPDATE users SET user_type = "${role}" WHERE gmail = "${email}"`, (err, results) => {
       if (err) {
         console.log(err);
       } else {

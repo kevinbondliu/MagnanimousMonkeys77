@@ -20,106 +20,123 @@ var instructorId = '';  // this will be the socket.id
 app.use(express.static(__dirname + '/../react-client/dist'));
 
 app.get('/googleLogin', (req, res) => {
+  console.log('this is the req query for google', req.query.role);
   var googleResults;
   google.verifyToken(req.query.tokenId, '663612425604-5tilrctspqjau1je9hgkq9h725gpjbp1.apps.googleusercontent.com')
-  .then(fromGoogle => {
-    googleResults = fromGoogle;
-    console.log('hi-----');
-    return db.getUserType(fromGoogle.gmail);
-  })
-  .then(result => {
-    console.log(result);
-    if (result.length === 0) {
-      //add user to db
-      console.log(`add user to db, ${googleResults.gmail}`);
-      return db.addStudent(googleResults.first, googleResults.last, googleResults.gmail);
-    } else {
-      res.status(200).send(result);
-      throw ('early exit from promise chain');
-    }
-  })
-  .then(result => {
-    console.log(result);
-    return db.getUserType(googleResults.gmail);
-  })
-  .then(result => {
-    res.status(201).send(result);
-  })
-  .catch(err => {
-    console.log(err);
-  })
+    .then(fromGoogle => {
+      googleResults = fromGoogle;
+      console.log('hi-----');
+      return db.getUserType(fromGoogle.gmail);
+    })
+    .then(result => {
+      console.log(result);
+      if (result.length === 0) {
+        //add user to db
+        console.log(`add user to db, ${googleResults.gmail}`);
+        if (req.query.role === 'STUDENT') {
+          return db.addStudent(googleResults.first, googleResults.last, googleResults.gmail);
+        }
+        if (req.query.role === 'INSTRUCTOR') {
+          return db.addInstructor(googleResults.first, googleResults.last, googleResults.gmail);
+        }
+      } else {
+        db.UpdateRole(req.query.role, googleResults.gmail)
+          .then(result => {
+            res.status(200).send(result);
+            throw ('early exit from promise chain');
+          })
+      }
+    })
+    .then(result => {
+      console.log(result);
+      return db.getUserType(googleResults.gmail);
+    })
+    .then(result => {
+      res.status(201).send(result);
+    })
+    .catch(err => {
+      console.log(err);
+    })
 })
 
 app.get('/FBlogin', (req, res) => {
   console.log('this is the query', req.query);
   db.getUserType(req.query.email)
-  .then(result => {
-    console.log(result);
-    if (result.length === 0) {
-      //add user to db
-      console.log(`add user to db, ${req.query}`);
-      return db.addStudent(req.query.firstName, req.query.lastName, req.query.email);
-    } else {
-      res.status(200).send(result);
-      throw ('early exit from promise chain');
-    }
-  })
-  .then(result => {
-    console.log(result);
-    return db.getUserType(req.query.email);
-  })
-  .then(result => {
-    res.status(201).send(result);
-  })
-  .catch(err => {
-    console.log(err);
-  })
+    .then(result => {
+      console.log(result);
+      if (result.length === 0) {
+        //add user to db
+        console.log(`add user to db, ${req.query}`);
+        if (req.query.role === 'STUDENT') {
+          return db.addStudent(req.query.firstName, req.query.lastName, req.query.email);
+        }
+        if (req.query.role === 'INSTRUCTOR') {
+          return db.addInstructor(req.query.firstName, req.query.lastName, req.query.email);
+        }
+      } else {
+        db.UpdateRole(req.query.role, req.query.email)
+          .then(result => {
+            res.status(200).send(result);
+            throw ('early exit from promise chain');
+          })
+      }
+    })
+    .then(result => {
+      console.log(result);
+      return db.getUserType(req.query.email);
+    })
+    .then(result => {
+      res.status(201).send(result);
+    })
+    .catch(err => {
+      console.log(err);
+    })
 })
 
 app.post('/lecture', (req, res) => {
   let name = req.query.name;
   db.createNewLecture(name)
-  .then(results => {
-    lectureId = results.insertId;
-    res.send({ lectureId: lectureId });
-    io.emit('lectureStarted', {
-      lectureId: lectureId,
-      lectureName: name
+    .then(results => {
+      lectureId = results.insertId;
+      res.send({ lectureId: lectureId });
+      io.emit('lectureStarted', {
+        lectureId: lectureId,
+        lectureName: name
+      })
     })
-  })
 })
 
 app.post('/checkthumbs', (req, res) => {
   let lecture = req.query.lecture_id;
   db.createNewQuestion(lecture)
-  .then(results => {
-    questionId = results.insertId;
-    thumbs = new ThumbsData(lectureId, questionId);
-    //Emit the new question to students here
-    io.emit('checkingThumbs', { questionId: questionId });
-    //This will add thumbsdata in the db after the question ends
-    db.asyncTimeout(32000, () => {
-      for (let student in thumbs.students) {
-        //console.log(`${thumbs.students[student].gmail}, ${thumbs.questionId}, ${thumbs.students[student].thumbValue}`);
-        db.createThumbData(thumbs.students[student].gmail, thumbs.questionId, thumbs.students[student].thumbValue);
-      }
-      db.addAvgThumbForQuestion(questionId, thumbs.getAverageThumbValue());
-    });
-    //send the response to the teacher
-    res.send({ questionId: questionId });
-  })
+    .then(results => {
+      questionId = results.insertId;
+      thumbs = new ThumbsData(lectureId, questionId);
+      //Emit the new question to students here
+      io.emit('checkingThumbs', { questionId: questionId });
+      //This will add thumbsdata in the db after the question ends
+      db.asyncTimeout(32000, () => {
+        for (let student in thumbs.students) {
+          //console.log(`${thumbs.students[student].gmail}, ${thumbs.questionId}, ${thumbs.students[student].thumbValue}`);
+          db.createThumbData(thumbs.students[student].gmail, thumbs.questionId, thumbs.students[student].thumbValue);
+        }
+        db.addAvgThumbForQuestion(questionId, thumbs.getAverageThumbValue());
+      });
+      //send the response to the teacher
+      res.send({ questionId: questionId });
+    })
 })
 
 app.post('/checkLectures', (req, res) => {
   let lecture = req.query.lectureName;
   db.lectureExists(lecture).
-  then( result => {
-    if(result.length > 0) {
-      res.send('1');
-    } else {
-      res.send('0');
-    }
-  })
+    then(result => {
+      if (result.length > 0) {
+        res.send('1');
+      } else {
+        res.send('0');
+      }
+    })
 })
 
 app.post('/endLecture', (req, res) => {
@@ -129,16 +146,16 @@ app.post('/endLecture', (req, res) => {
   io.emit('lectureEnded', { response: 'ok' });
 
   db.getAvgThumbsForQuestionsInLecture(lectureId)
-  .then(results => {
-    console.log(results);
-    let sum = 0;
-    let avg = 0;
-    for (let i = 0; i < results.length; i++) {
-      sum += results[i].average_thumb_question;
-    }
-    avg = (sum / results.length);
-    db.addAvgThumbForLecture(lectureId, avg);
-  });
+    .then(results => {
+      console.log(results);
+      let sum = 0;
+      let avg = 0;
+      for (let i = 0; i < results.length; i++) {
+        sum += results[i].average_thumb_question;
+      }
+      avg = (sum / results.length);
+      db.addAvgThumbForLecture(lectureId, avg);
+    });
   res.status(200).send('end lecture');
 });
 
@@ -147,19 +164,19 @@ io.on('connection', function (socket) {
   console.log(`socket: ${socket}`);
   //console.log(`rooms: ${socket._rooms}`);
 
-  socket.on('lectureName', function(data) {
+  socket.on('lectureName', function (data) {
     socket.join(data.lecture);
     //console.log(io.sockets.adapter.rooms);
   })
 
-  socket.on('changeLecture', function(data){
+  socket.on('changeLecture', function (data) {
     socket.leave(data.currentLecture);
     socket.join(data.newLecture);
   })
-  
+
   //socket.join('Test Room');
   //put the gmail username on each socket that is connected
-  socket.on('username', function(data) {
+  socket.on('username', function (data) {
     console.log('username', data);
     socket.username = data.username;
   });
