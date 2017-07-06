@@ -54,10 +54,15 @@ INSERT INTO users (first_name, last_name, gmail, user_type) VALUES ("Robs", "Ren
 
 INSERT INTO users (first_name, last_name, gmail, user_type) VALUES ("Julia", "Wong", "juliawong05@gmail.com", "INSTRUCTOR");
 INSERT INTO users (first_name, last_name, gmail, user_type) VALUES ("Shyan", "Instructor", "shyankashani1@gmail.com", "INSTRUCTOR");
+<<<<<<< HEAD
 INSERT INTO users (first_name, last_name, gmail, user_type) VALUES ("Jey", "Reyes", "jesselowellreyes@gmail.com", "INSTRUCTOR");
 INSERT INTO users (first_name, last_name, gmail, user_type) VALUES ("Jesse", "Reyes", "jesselowellreyes1@gmail.com", "INSTRUCTOR");
 INSERT INTO users (first_name, last_name, gmail, user_type) VALUES ("Kevin", "Liu", "kevinbondliu@gmail.com", "INSTRUCTOR");
 
+=======
+INSERT INTO users (first_name, last_name, gmail, user_type) VALUES ("Jey", "Reyes", "jesselowellreyes@gmail.com", “INSTRUCTOR”);
+INSERT INTO users (first_name, last_name, gmail, user_type) VALUES ("Jesse", "Reyes", "jesselowellreyes1@gmail.com", "INSTRUCTOR");
+>>>>>>> origin
 
 /*  Execute this file from the command line by typing:
  *    mysql -u root < schema.sql

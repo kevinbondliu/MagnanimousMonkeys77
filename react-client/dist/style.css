@@ -55,6 +55,11 @@ p {
 }
 
 .FacebookButton {
+<<<<<<< HEAD
   margin-left: 580px !important;
   margin-top: 180px !important;
+=======
+    margin-top: 150px !important;
+    margin-left: 580px !important;
+>>>>>>> origin
 }
