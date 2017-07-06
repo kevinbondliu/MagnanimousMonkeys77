@@ -23,7 +23,8 @@ class App extends React.Component {
       thumbValue: 2,
       countdown: 30,
       givenName: '',
-      lectureName: ''
+      lectureName: 'lobby',
+      roomChange: ''
     }
   }
 
@@ -40,18 +41,20 @@ class App extends React.Component {
         tokenId: tokenId
       }
     })
-      .then(result => {
-        if (result.data[0].user_type === 'STUDENT') {
-          this.setState({ view: 'student' });
-        } else if (result.data[0].user_type === 'INSTRUCTOR') {
-          this.setState({ view: 'instructor' });
-        }
-        this.setState({ givenName: googleUser.profileObj.givenName })
-        socket.emit('username', { username: googleUser.profileObj.email })
-        if (result.data[0].user_type === 'INSTRUCTOR') {
-          socket.emit('instructor', { username: googleUser.profileObj.email })
-        }
-      });
+    .then(result => {
+
+      socket.emit('lectureName', {room: 'lobby'});
+      if (result.data[0].user_type === 'STUDENT') {
+        this.setState({ view: 'student'});
+      } else if (result.data[0].user_type === 'INSTRUCTOR') {
+        this.setState({ view: 'instructor'});
+      }
+      this.setState({ givenName: googleUser.profileObj.givenName })
+      socket.emit('username', { username: googleUser.profileObj.email })
+      if(result.data[0].user_type === 'INSTRUCTOR'){
+        socket.emit('instructor', { username: googleUser.profileObj.email })
+      }
+    });
 
   }
 
@@ -178,6 +181,31 @@ class App extends React.Component {
     })
   }
 
+  changeLecture (lectureName) {
+    event.preventDefault();
+    axios({
+      method: 'post',
+      url: '/checkLectures',
+      params: {
+        lectureName: lectureName
+      }
+    }).then(result => {
+      if(result.data === 1){
+        //console.log('Succesfully found lecture');
+        socket.emit('changeLecture', {currentLecture: this.state.lectureName, newLecture: lectureName});
+        this.setState({lectureName: lectureName});
+      } else {
+        //console.log('Lecture Not Found');
+      }
+    })
+    
+    
+
+  }
+  handleLectureChange(event) {
+    event.preventDefault();
+    this.changeLecture(this.input.value);
+  }
 
   render() {
     return (
@@ -187,6 +215,13 @@ class App extends React.Component {
             <button href="#" onClick={this.signOut.bind(this)}>
               LogOut!
           </button>
+
+           <form onSubmit={this.handleLectureChange.bind(this)}>
+              Lecture Name:
+              <input type="text" ref={(input) => this.input = input} />
+            <input className="location-submit" type="submit" value="Search for Lecture"/>
+          </form>
+           <div>{this.state.lectureName}</div>
             <div className="navbar-header">
               <a className="navbar-brand">
                 <i className="fa fa-thumbs-o-up" aria-hidden="true"></i>
