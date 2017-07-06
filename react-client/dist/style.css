@@ -5,15 +5,30 @@
 .navbar {
   background-color: #0099ff !important;
 }
-
-.navbar * {
-  color: white !important;
+.container-fluid {
+  padding-top: 20px;
 }
 
+.navbar * {
+  color: black !important;
+  font-size: medium;
+}
+.navbar-brand {
+  font-size: x-large;
+  font-family: 'Comic Sans MS';
+}
+.fa {
+  margin-right: 10px;
+}
 .form-control {
   margin-top: 24vh !important;
   padding-top: 18px !important;
   padding-bottom: 18px !important;
+}
+.submitForm {
+  float: right;
+  margin-right: 30px;
+  margin-top: 10px;
 }
 
 .btn {
@@ -23,7 +38,10 @@
   width: 64vw !important;
   margin-top: 24vh !important;
 }
-
+.logout {
+  float: right;
+  margin-top: 10px;
+}
 .btn-success {
   background-color: limegreen !important;
 }
