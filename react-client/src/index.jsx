@@ -155,7 +155,6 @@ class App extends React.Component {
     }
 
     startMultipleChoice(questionId) {
-      console.log('IT REACHED HERE ALIDLASHD');
         this.setState({
             lectureStatus: 'multipleChoice',
             questionId: questionId

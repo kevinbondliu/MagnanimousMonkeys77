@@ -137,7 +137,7 @@ app.post('/multiplechoice', (req, res) => {
 
       io.emit('multipleChoice', {questionId: questionId});
 
-      db.asyncTimeout(3200, () => {
+      db.asyncTimeout(32000, () => {
         // console.log('ALSHDALSHD',answer)
         console.log('answer.students', answer.students);
         console.log(answer);
