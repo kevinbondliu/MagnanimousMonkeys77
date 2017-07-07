@@ -177,6 +177,26 @@ class App extends React.Component {
     	})
     }
 
+    // calculateAllVotes(oneVote) {
+    // 	//oneVote is an array [0,0,1,0,0]
+
+    //   let totalVotes = [0, 0, 0, 0, 0];
+    //   let index = oneVote.indexOf(1);
+    //   totalVotes[index]++;
+    //   //return totalVotes;
+    //     setTimeout(() => {
+    //     this.setState({      barChartData: {
+    //     labels: ['I DON\'T GET IT', 'NOT REALLY', 'NEUTRAL', 'I ALMOST GET IT', 'I GOT THIS!'],
+    //     datasets: [
+    //       {
+    //         data: thumbVotes, // this.props.votes
+    //         backgroundColor: ['rgba(255, 45, 45, 0.8)', 'rgba(51, 153, 255, 0.8)', 'rgba(255, 255, 102, 0.8)', 'rgba(153, 102, 255, 0.8)', 'rgba(75, 192, 192, 0.8)']
+    //       }
+    //     ]
+    //   }})
+    // 	}, 32000);
+    // }
+
     signOut() {
         // FB.logout(function(response){
         //   console.lg

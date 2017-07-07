@@ -8,7 +8,6 @@ class ThumbVisualization extends React.Component {
     constructor(props) {
         super(props);
         this.state = {}
-        //this.props.changeThumbVotes()
     }
 
     getInitialState() {

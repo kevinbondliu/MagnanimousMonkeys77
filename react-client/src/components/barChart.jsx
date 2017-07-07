@@ -9,6 +9,8 @@ class BarChart extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      storage: [1, 2, 3, 4, 5], //grab storage from db
+      totalVotes: [0, 0, 0, 0, 0],
       barChartData: {
         labels: ['I DON\'T GET IT', 'NOT REALLY', 'NEUTRAL', 'I ALMOST GET IT', 'I GOT THIS!'],
         datasets: [
@@ -20,15 +22,26 @@ class BarChart extends React.Component {
       }
     };
 
+
     socket.on('thumbVotes', (data) => {
-        //make props.changeThumbVotes function // or grab and apss dowwn, invoke in graphs
-        console.log('j---------', data.thumbVotes);
-        //props.changeThumbVotes([1, 2, 3, 4, 5]); // data.getVotes
+      let storage = this.state.storage;
+      let total = this.state.totalVotes;
+      //total[thumbVotes.indexOf(1)]++;
+      this.setState({totalVotes: data.thumbVotes});
+
+        console.log('votes', data.thumbVotes);
+
+        var temp = [];
+        for (var i = 0; i < 5; i++) {
+          temp.push(storage[i] + total[i]);
+        }
+        setTimeout(() => { this.setState({storage: temp}) } , 32000);
+
         this.setState({barChartData: {
         labels: ['I DON\'T GET IT', 'NOT REALLY', 'NEUTRAL', 'I ALMOST GET IT', 'I GOT THIS!'],
         datasets: [
           {
-            data: data.thumbVotes, // this.props.votes
+            data: temp, // this.props.votes
             backgroundColor: ['rgba(255, 45, 45, 0.8)', 'rgba(51, 153, 255, 0.8)', 'rgba(255, 255, 102, 0.8)', 'rgba(153, 102, 255, 0.8)', 'rgba(75, 192, 192, 0.8)']
           }
         ]
