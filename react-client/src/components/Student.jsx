@@ -50,7 +50,9 @@ class Student extends React
             changeThumbValue={this.props.changeThumbValue}
           />
         :
-          <MultipleChoice/>}
+          <MultipleChoice
+          countdown={this.props.countdown}
+          />}
       </div>
     )
   }

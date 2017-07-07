@@ -26,6 +26,12 @@ class MultipleChoice extends React.Component {
           <div class="checkbox">
             <label><input type="checkbox" value=""/>Option 3</label>
           </div>
+          <div class="checkbox">
+            <label><input type="checkbox" value=""/>Option 2</label>
+          </div>
+          <div class="checkbox">
+            <label><input type="checkbox" value=""/>Option 3</label>
+          </div>
         </div>
         <Countdown countdown={this.props.countdown} />
       </div>
