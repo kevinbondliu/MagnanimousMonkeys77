@@ -224,11 +224,6 @@ class App extends React.Component {
                         <button className='logout' href="#" onClick={this.signOut.bind(this)}>
                             LogOut!
                         </button>
-                        <form className='submitForm' onSubmit={this.handleLectureChange.bind(this)}>
-                            Lecture Name:
-                            <input type="text" ref={(input) => this.input = input} />
-                            <input className="location-submit" type="submit" value="Search for Lecture" />
-                        </form>
                         <div className="navbar-header">
                             <a className="navbar-brand">
                                 <i className="fa fa-thumbs-o-up" aria-hidden="true"></i>

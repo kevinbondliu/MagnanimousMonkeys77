@@ -21,7 +21,7 @@ class Login extends React.Component {
   render() {
     return (
       <div className="row">
-        <div className="col-xs-12 text-center">
+        <div className="GoogleButton">
           <GoogleLogin
             clientId="663612425604-5tilrctspqjau1je9hgkq9h725gpjbp1.apps.googleusercontent.com"
             scope="profile email"
@@ -32,6 +32,7 @@ class Login extends React.Component {
             className="btn btn-lg btn-danger"
           />
         </div>
+
         <div className = "FacebookButton">
         <FacebookLogin 
           appId="184065032128462"
