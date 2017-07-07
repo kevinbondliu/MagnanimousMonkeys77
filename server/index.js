@@ -127,6 +127,29 @@ app.post('/checkthumbs', (req, res) => {
     })
 })
 
+app.post('/multiplechoice', (req, res) => {
+  let lecture = req.query.lecture_id;
+  db.createNewQuestion(lecture)
+    .then((results) => {
+      questionsId = results.insertId;
+      multipleChoice = new MultipleChoiceData(lectureId,questionId);
+
+      io.emit('multipleChoice', {questionId: questionId});
+
+      db.asyncTimeout(32000, () => {
+        for(let students in multipleChoice.students) {
+          db.createMultipleChoiceData(multipleChoice.students[student].email, multipleChoice.questionId, multipleChoice.students[studnet].inputValue)
+        }
+        var answers = multipleChoice.getTotalCount();
+        db.addMultipleChoiceForLecture(questionId, answers.A, answers.B, answers.C, answers.D, answers.E)
+      });
+
+      res.send({questionId: questionId});
+    })
+
+
+})
+
 app.post('/checkLectures', (req, res) => {
   let lecture = req.query.lectureName;
   db.lectureExists(lecture).
@@ -203,6 +226,38 @@ io.on('connection', function (socket) {
     }
   })
 });
+
+class MultipleChoiceData {
+  constructor(lectureId, questionId, instructor) {
+    this.lectureId = lectureId;
+    this.questionId = questionId;
+    this.students = {};
+    this.instructor = instructor;
+  }
+
+  addStudent(student) {
+    this.students[student.email] = student;
+  }
+
+  setAnswerChoiceForStudent(email, inputValue) {
+    this.students[email].inputValue = inputValue;
+  }
+
+  getTotalCount() {
+    var storage = {
+      A: 0,
+      B: 0,
+      C: 0,
+      D: 0,
+      E: 0
+    }
+    for( let student in this.students) {
+      storage[this.students[student].inputValue] += 1;
+    }
+    return storage;
+  }
+
+}
 
 class ThumbsData {
   constructor(lectureId, questionId, instructor) {

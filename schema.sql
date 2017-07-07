@@ -30,6 +30,11 @@ CREATE TABLE questions (
   id INT NOT NULL AUTO_INCREMENT,
   lecture_id INT NOT NULL,
   average_thumb_question DEC(4,2),
+  A INT,
+  B INT,
+  C INT,
+  D INT,
+  E INT,
   PRIMARY KEY (ID)
 );
 
@@ -38,6 +43,15 @@ CREATE TABLE thumbs (
   user_id INT NOT NULL,
   question_id INT NOT NULL,
   thumb_value INT NOT NULL,
+  timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (ID)
+);
+
+CREATE TABLE choice (
+  id INT NOT NULL AUTO_INCREMENT,
+  user_id INT NOT NULL,
+  question_id INT NOT NULL,
+  answer VARCHAR(1) NOT NULL,
   timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (ID)
 );

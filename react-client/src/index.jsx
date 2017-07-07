@@ -149,6 +149,14 @@ class App extends React.Component {
         }, this.setCountdownInterval)
     }
 
+    startMultipleChoice(questionId) {
+      console.log('IT REACHED HERE ALIDLASHD');
+        this.setState({
+            lectureStatus: 'multipleChoice',
+            questionId: questionId
+        }, this.setCountdownInterval)
+    }
+
     endThumbsCheck() {
         this.setState({
             lectureStatus: 'lectureStarted',
