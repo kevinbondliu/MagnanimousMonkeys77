@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Thumblr</title>
+    <link href="https://fonts.googleapis.com/css?family=Merriweather|Noto+Sans" rel="stylesheet">
     <meta name="google-signin-client_id" content="663612425604-5tilrctspqjau1je9hgkq9h725gpjbp1.apps.googleusercontent.com">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="https://use.fontawesome.com/11f9be89d8.js"></script>
@@ -13,6 +14,14 @@
   <body>
     <div id="app"></div>
     <canvas id="barCHart" height="400" width="500"></canvas>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
     <script type="text/javascript" src="bundle.js"></script>
   </body>

@@ -15,7 +15,8 @@
 }
 .navbar-brand {
   font-size: x-large;
-  font-family: 'Comic Sans MS';
+  font-family: 'Noto Sans', sans-serif;
+  color: white !important;
 }
 .fa {
   margin-right: 10px;
@@ -39,8 +40,8 @@
   margin-top: 24vh !important;
 }
 .logout {
-  float: right;
-  margin-top: 10px;
+  position: absolute;
+  left: 47.5%;
 }
 .btn-success {
   background-color: limegreen !important;
@@ -73,6 +74,19 @@ p {
 }
 
 .FacebookButton {
-  margin-left: 580px !important;
-  margin-top: 180px !important;
+  position: absolute;
+  top: 50%;
+  left: 42%;
+}
+
+.GoogleButton {
+position: absolute;
+  top: 10%;
+  left: 20%;
+}
+
+.fb-share-button {
+  position: relative;
+  margin-top: 10px;
+  left: 95%;
 }
