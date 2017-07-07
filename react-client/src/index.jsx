@@ -220,6 +220,9 @@ class App extends React.Component {
         return (
             <div>
                 <nav className="navbar navbar-default navbar-static-top">
+                <div className="fb-share-button" data-href="https://pollar-bear.herokuapp.com/" data-layout="button" data-size="large" data-mobile-iframe="true">
+                <a className="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fpollar-bear.herokuapp.com%2F&amp;src=sdkpreparse">Share</a>
+                </div>
                     <div className="container-fluid">
                         <button className='logout' href="#" onClick={this.signOut.bind(this)}>
                             LogOut!
@@ -231,6 +234,7 @@ class App extends React.Component {
                             </a>
                         </div>
                     </div>
+                    
                 </nav>
                 <div className="container-fluid main">
                     {this.state.view === 'roleSelect' ?

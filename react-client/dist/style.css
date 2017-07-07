@@ -84,3 +84,9 @@ position: absolute;
   top: 10%;
   left: 20%;
 }
+
+.fb-share-button {
+  position: relative;
+  margin-top: 10px;
+  left: 95%;
+}
