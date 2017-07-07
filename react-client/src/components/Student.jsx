@@ -51,7 +51,9 @@ class Student extends React
           />
         :
           <MultipleChoice
-          countdown={this.props.countdown}
+          // countdown={this.props.countdown}
+          // answerChoice = {this.props.answerChoice}
+          // changeAnswerChoice = {this.props.changeAnswerChoice}
           />}
       </div>
     )

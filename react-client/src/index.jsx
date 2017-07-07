@@ -24,7 +24,8 @@ class App extends React.Component {
             countdown: 30,
             givenName: '',
             lectureName: 'lobby',
-            roomChange: ''
+            roomChange: '',
+            answerChoice: ''
         }
         this.role;
     }
@@ -177,6 +178,12 @@ class App extends React.Component {
             thumbValue: value
         })
     }
+    changeAnswerChoice(value) {
+      console.log(value);
+        this.setState({
+            answerChoice: value
+        })
+    }
     signOut() {
         // FB.logout(function(response){
         //   console.lg
@@ -256,6 +263,8 @@ class App extends React.Component {
                             />
                             : this.state.view === 'student'
                                 ? <Student
+                                    answerChoice = {this.state.answerChoice}
+                                    changeAnswerChoice = {this.changeAnswerChoice.bind(this)}
                                     thumbValue={this.state.thumbValue}
                                     changeThumbValue={this.changeThumbValue.bind(this)}
                                     startThumbsCheck={this.startThumbsCheck.bind(this)}

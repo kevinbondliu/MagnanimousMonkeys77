@@ -23,6 +23,11 @@ CREATE TABLE lectures (
   id INT NOT NULL AUTO_INCREMENT,
   name VARCHAR(50) NOT NULL,
   average_thumb_lecture DEC(4,2),
+  A INT,
+  B INT,
+  C INT,
+  D INT,
+  E INT,
   PRIMARY KEY (ID)
 );
 

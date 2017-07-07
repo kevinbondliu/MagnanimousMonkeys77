@@ -15,6 +15,7 @@ server.listen(port);
 var lectureId = '';
 var questionId = '';
 var thumbs = '';
+var answer = '';
 var instructorId = '';  // this will be the socket.id
 
 app.use(express.static(__dirname + '/../react-client/dist'));
@@ -132,15 +133,15 @@ app.post('/multiplechoice', (req, res) => {
   db.createNewQuestion(lecture)
     .then((results) => {
       questionsId = results.insertId;
-      multipleChoice = new MultipleChoiceData(lectureId,questionId);
+      answer = new MultipleChoiceData(lectureId,questionId);
 
       io.emit('multipleChoice', {questionId: questionId});
 
       db.asyncTimeout(32000, () => {
-        for(let students in multipleChoice.students) {
-          db.createMultipleChoiceData(multipleChoice.students[student].email, multipleChoice.questionId, multipleChoice.students[studnet].inputValue)
+        for(let students in answer.students) {
+          db.createMultipleChoiceData(answer.students[student].email, answer.questionId, answer.students[studnet].inputValue)
         }
-        var answers = multipleChoice.getTotalCount();
+        var answers = answer.getTotalCount();
         db.addMultipleChoiceForLecture(questionId, answers.A, answers.B, answers.C, answers.D, answers.E)
       });
 
@@ -225,6 +226,20 @@ io.on('connection', function (socket) {
       console.log(`thumb value for ${socket.username} is ${data.thumbValue}`);
     }
   })
+
+    socket.on('multipleChoiceAnswer', data => {
+    if (answer) {
+      if (!answer.hasStudent(socket.username)) {
+        let student = new Student(socket.username, socket.id);
+        answer.addStudent(student);
+      }
+      answer.setAnswerChoiceForStudent(socket.username, data.thumbValue);
+      let totalCount = answer.getTotalCount();
+      io.emit('totalAnswers', { getTotalCount: totalCount });
+      console.log(`sending multipleChoiceValue of ${totalCount}`);
+      console.log(`multiple value for ${socket.username} is ${data.thumbValue}`);
+    }
+  })
 });
 
 class MultipleChoiceData {
@@ -301,5 +316,6 @@ class Student {
     this.gmail = gmail;
     this.socketId = socketId;
     this.thumbValue = null;
+    this.answer = null;
   }
 }

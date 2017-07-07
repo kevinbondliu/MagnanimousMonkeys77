@@ -21,6 +21,9 @@
 .fa {
   margin-right: 10px;
 }
+.option {
+  font-size: small;
+}
 .form-control {
   margin-top: 24vh !important;
   padding-top: 18px !important;

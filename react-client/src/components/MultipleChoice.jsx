@@ -1,5 +1,6 @@
 import React from 'react';
 import Countdown from './Countdown.jsx';
+import MultipleChoiceVisualization from './MultipleChoiceVisualization.jsx';
 
 class MultipleChoice extends React.Component {
   constructor(props) {
@@ -17,21 +18,10 @@ class MultipleChoice extends React.Component {
           </div>
 				</div>
         <div className="row student">
-          <div class="checkbox">
-            <label><input type="checkbox" value=""/>Option 1</label>
-          </div>  
-          <div class="checkbox">
-            <label><input type="checkbox" value=""/>Option 2</label>
-          </div>
-          <div class="checkbox">
-            <label><input type="checkbox" value=""/>Option 3</label>
-          </div>
-          <div class="checkbox">
-            <label><input type="checkbox" value=""/>Option 2</label>
-          </div>
-          <div class="checkbox">
-            <label><input type="checkbox" value=""/>Option 3</label>
-          </div>
+          <MultipleChoiceVisualization
+            answerChoice = {this.props.answerChoice}
+            changeAnswerChoice = {this.props.changeAnswerChoice}
+          />
         </div>
         <Countdown countdown={this.props.countdown} />
       </div>
