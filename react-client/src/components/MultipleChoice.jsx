@@ -18,10 +18,10 @@ class MultipleChoice extends React.Component {
 				</div>
         <div className="row student">
           <div class="checkbox">
-            <label><input type="checkbox" value=""/>>Option 1</label>
+            <label><input type="checkbox" value=""/>Option 1</label>
           </div>  
           <div class="checkbox">
-            <label><input type="checkbox" value=""/>>Option 2</label>
+            <label><input type="checkbox" value=""/>Option 2</label>
           </div>
           <div class="checkbox">
             <label><input type="checkbox" value=""/>Option 3</label>

@@ -259,6 +259,7 @@ class App extends React.Component {
                                     thumbValue={this.state.thumbValue}
                                     changeThumbValue={this.changeThumbValue.bind(this)}
                                     startThumbsCheck={this.startThumbsCheck.bind(this)}
+                                    startMultipleChoice = {this.startMultipleChoice.bind(this)}
                                     startLecture={this.startLecture.bind(this)}
                                     lectureStatus={this.state.lectureStatus}
                                     countdown={this.state.countdown}
