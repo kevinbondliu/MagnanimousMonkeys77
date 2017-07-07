@@ -86,6 +86,19 @@ exports.addAvgThumbForQuestion = function(questionId, avgThumbValue) {
   })
 }
 
+
+exports.addMultipleChoiceForQuestion = function(lectureId, answerA, answerB, answerC, answerD, answerE){
+  return new Promise ((resolve, reject) => {
+    pool.query(`UPDATE questions SET answerB=${answerB}, answerB=${answerB}, answerC=${answerC}, answerD=${answerD}, answerE=${answerE} WHERE id=${lectureId}`, (err, results) => {
+      if (err) {
+        console.log(err);
+      } else {
+        resolve(results);
+      }
+    });
+  })
+}
+
 exports.addAvgThumbForLecture = function(lectureId, avgThumbValue) {
   return new Promise ((resolve, reject) => {
     pool.query(`UPDATE lectures SET average_thumb_lecture=${avgThumbValue} WHERE id=${lectureId}`, (err, results) => {
@@ -98,17 +111,6 @@ exports.addAvgThumbForLecture = function(lectureId, avgThumbValue) {
   })
 }
 
-exports.addMultipleChoiceForLecture = function(lectureId, A, B, C, D, E) {
-  return new Promise ((resolve, reject) => {
-    pool.query(`UPDATE lectures SET A=${A}, B=${B}, C=${C}, D=${D}, E=${E} WHERE id=${lectureId}`, (err, results) => {
-      if (err) {
-        console.log(err);
-      } else {
-        resolve(results);
-      }
-    });
-  })
-}
 
 
 
@@ -142,10 +144,11 @@ exports.createThumbData = function(gmail, questionId, thumbsValue) {
 
 exports.createMultipleChoiceData = function(gmail, questionId, answer) {
   return new Promise ((resolve, reject) => {
-    pool.query(`INSERT INTO choice (user_id, question_id, answer) VALUES ((SELECT id FROM users WHERE gmail="${gmail}"), ${questionId}, ${answer})`, (err, results) => {
+    pool.query(`INSERT INTO choice (user_id, question_id, answer) VALUES ((SELECT id FROM users WHERE gmail= ?), ?, ?)`,[gmail,questionId,answer],(err, results) => {
       if (err) {
         console.log(err);
       } else {
+
         resolve(results);
       }
     });

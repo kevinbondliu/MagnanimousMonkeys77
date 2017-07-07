@@ -19,25 +19,29 @@ class MultipleChoiceVisualization extends React.Component {
   handleSelect(key) {
     this.setState({ key });
   }
+  
+  getAnswer(event) {
+    this.props.changeAnswerChoice(event.target.value);
+  }
 
   render() {
     return (
       <Tabs activeKey={this.state.key} onSelect={this.handleSelect} id="controlled-tab-example">
         <Tab eventKey={1} title="Tab 1">
             <div class="checkbox" className = 'option'>
-              <label><input type="checkbox" value="A" onChange = {this.props.changeAnswerChoice}/>Option 1</label>
+              <label><input type="checkbox" value="A" onChange = {this.getAnswer.bind(this)}/>Option 1</label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" value="B" onChange = {this.props.changeAnswerChoice}/>Option 2</label>
+              <label><input type="checkbox" value="B" onChange = {this.getAnswer.bind(this)}/>Option 2</label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" value="C" onChange = {this.props.changeAnswerChoice}/>Option 3</label>
+              <label><input type="checkbox" value="C" onChange = {this.getAnswer.bind(this)}/>Option 3</label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" value="D" onChange = {this.props.changeAnswerChoice}/>Option 2</label>
+              <label><input type="checkbox" value="D" onChange = {this.getAnswer.bind(this)}/>Option 2</label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" value="E" onChange = {this.props.changeAnswerChoice}/>Option 3</label>
+              <label><input type="checkbox" value="E" onChange = {this.getAnswer.bind(this)}/>Option 3</label>
             </div>
         </Tab>
         <Tab eventKey={2} title="Tab 2">

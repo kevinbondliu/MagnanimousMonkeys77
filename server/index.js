@@ -119,7 +119,7 @@ app.post('/checkthumbs', (req, res) => {
       db.asyncTimeout(32000, () => {
         for (let student in thumbs.students) {
           //console.log(`${thumbs.students[student].gmail}, ${thumbs.questionId}, ${thumbs.students[student].thumbValue}`);
-          db.createThumbData(thumbs.students[student].gmail, thumbs.questionId, thumbs.students[student].thumbValue);
+          db.createThumbData(thumbs.students[student].email, thumbs.questionId, thumbs.students[student].thumbValue);
         }
         db.addAvgThumbForQuestion(questionId, thumbs.getAverageThumbValue());
       });
@@ -132,17 +132,23 @@ app.post('/multiplechoice', (req, res) => {
   let lecture = req.query.lecture_id;
   db.createNewQuestion(lecture)
     .then((results) => {
-      questionsId = results.insertId;
+      questionId = results.insertId;
       answer = new MultipleChoiceData(lectureId,questionId);
 
       io.emit('multipleChoice', {questionId: questionId});
 
-      db.asyncTimeout(32000, () => {
-        for(let students in answer.students) {
-          db.createMultipleChoiceData(answer.students[student].email, answer.questionId, answer.students[studnet].inputValue)
+      db.asyncTimeout(3200, () => {
+        // console.log('ALSHDALSHD',answer)
+        console.log('answer.students', answer.students);
+        console.log(answer);
+        for(let student in answer.students) {
+          console.log('student', student);
+          console.log('inputvalue', answer.students[student].inputValue, answer.questionId);
+          db.createMultipleChoiceData(answer.students[student].email, answer.questionId, answer.students[student].inputValue);
         }
         var answers = answer.getTotalCount();
-        db.addMultipleChoiceForLecture(questionId, answers.A, answers.B, answers.C, answers.D, answers.E)
+        console.log(answers.A, typeof(answers.A))
+        db.addMultipleChoiceForQuestion(questionId, answers.A, answers.B, answers.C, answers.D, answers.E)
       });
 
       res.send({questionId: questionId});
@@ -233,7 +239,8 @@ io.on('connection', function (socket) {
         let student = new Student(socket.username, socket.id);
         answer.addStudent(student);
       }
-      answer.setAnswerChoiceForStudent(socket.username, data.thumbValue);
+      console.log('this is the data on MultipleChoice Socket', data);
+      answer.setAnswerChoiceForStudent(socket.username, data.answerChoice);
       let totalCount = answer.getTotalCount();
       io.emit('totalAnswers', { getTotalCount: totalCount });
       console.log(`sending multipleChoiceValue of ${totalCount}`);
@@ -272,6 +279,10 @@ class MultipleChoiceData {
     return storage;
   }
 
+  hasStudent(email) {
+    return this.students.hasOwnProperty(email);
+  }
+
 }
 
 class ThumbsData {
@@ -284,12 +295,12 @@ class ThumbsData {
 
   //adds a student to the data structure
   addStudent(student) {
-    this.students[student.gmail] = student;
+    this.students[student.email] = student;
   }
 
   //sets the thumb value for the student
-  setThumbValueForStudent(gmail, thumbValue) {
-    this.students[gmail].thumbValue = thumbValue;
+  setThumbValueForStudent(email, thumbValue) {
+    this.students[email].thumbValue = thumbValue;
   }
 
   //returns the average thumb value
@@ -306,16 +317,16 @@ class ThumbsData {
   }
 
   //check if a student is connected
-  hasStudent(gmail) {
-    return this.students.hasOwnProperty(gmail);
+  hasStudent(email) {
+    return this.students.hasOwnProperty(email);
   }
 }
 
 class Student {
-  constructor(gmail, socketId) {
-    this.gmail = gmail;
+  constructor(email, socketId) {
+    this.email = email;
     this.socketId = socketId;
     this.thumbValue = null;
-    this.answer = null;
+    this.inputValue = null;
   }
 }

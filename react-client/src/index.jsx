@@ -126,6 +126,10 @@ class App extends React.Component {
                 : this.setState({ countdown: this.state.countdown - 1 }, () => {
                     console.log('this.state.countdown', this.state.countdown);
                     if (this.state.view === 'student') {
+                      if(this.state.answerChoice != '') {
+                        console.log('it reached here at answerchoice');
+                        socket.emit('multipleChoiceAnswer', {answerChoice: this.state.answerChoice});
+                      }
                         socket.emit('thumbValue', { thumbValue: this.state.thumbValue });
                     }
                 });
@@ -179,7 +183,7 @@ class App extends React.Component {
         })
     }
     changeAnswerChoice(value) {
-      console.log(value);
+      console.log('this is the value from multiplechoice', value);
         this.setState({
             answerChoice: value
         })
