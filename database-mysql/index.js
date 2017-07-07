@@ -11,6 +11,11 @@ var pool  = mysql.createPool({
 
 console.log(`db connection: DB_HOST localhost, DB_USERNAME root, DB_PASSWORD plantlife, DB_NAME thumbscheck`);
 
+
+// exports.getVotes = function() {
+
+// }
+
 exports.getUserType = function(gmail) {
   return new Promise ((resolve, reject) => {
     pool.query(`SELECT user_type FROM users WHERE gmail = "${gmail}"`, (err, results) => {
@@ -51,7 +56,7 @@ exports.lectureExists = function(lectureName) {
   return new Promise ((resolve, reject) => {
     pool.query(`SELECT * FROM LECTURES WHERE NAME = ("${lectureName}")`, (err, results) => {
       if (err) {
-        console.log(err); 
+        console.log(err);
       } else {
         resolve(results);
       }

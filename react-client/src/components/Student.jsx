@@ -16,6 +16,7 @@ class Student extends React.Component {
 
     socket.on('checkingThumbs', (data) => {
       props.startThumbsCheck(data.questionId);
+      //
     })
 
     socket.on('lectureEnded', (data) => {

@@ -17,6 +17,12 @@ class Instructor extends React.Component {
         props.changeThumbValue(data.averageThumbValue);
       }
     });
+
+    socket.on('thumbVotes', (data) => {
+      if (props.view === 'instructor') {
+        //make props.changeVotes function // or grab and apss dowwn, invoke in graphs
+      }
+    })
   }
 
   render () {
@@ -37,7 +43,9 @@ class Instructor extends React.Component {
             lectureId={this.props.lectureId}
             countdown={this.props.countdown}
             thumbValue={this.props.thumbValue}
+            thumbVotes={this.props.thumbVotes}
             clearThumbsCheck={this.props.clearThumbsCheck}
+            changeThumbVotes={this.props.changeThumbVotes}
           />}
       </div>
     )

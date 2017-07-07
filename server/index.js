@@ -119,6 +119,10 @@ app.post('/checkthumbs', (req, res) => {
         for (let student in thumbs.students) {
           //console.log(`${thumbs.students[student].gmail}, ${thumbs.questionId}, ${thumbs.students[student].thumbValue}`);
           db.createThumbData(thumbs.students[student].gmail, thumbs.questionId, thumbs.students[student].thumbValue);
+
+        // after question ends
+          //db query to find all specific votes
+
         }
         db.addAvgThumbForQuestion(questionId, thumbs.getAverageThumbValue());
       });
@@ -196,6 +200,11 @@ io.on('connection', function (socket) {
         thumbs.addStudent(student);
       }
       thumbs.setThumbValueForStudent(socket.username, data.thumbValue);
+      //use getVotes and emit votes
+      let votes = thumbs.getVotes();
+      io.emit('thumbVotes', { thumbVotes: votes });
+      console.log(`sending thumbVotes of ${votes}`);
+
       let average = thumbs.getAverageThumbValue();
       io.emit('averageThumbValue', { averageThumbValue: average });
       console.log(`sending averageThumbValue of ${average}`);
@@ -233,6 +242,29 @@ class ThumbsData {
       }
     }
     return total / count;
+  }
+
+  // returns student votes
+  getVotes() {
+    let thumb_e = 0;
+    let thumb_d = 0;
+    let thumb_c = 0;
+    let thumb_b = 0;
+    let thumb_a = 0;
+    for (let student in this.students) {
+      if (this.students[student].thumbValue === 0) {
+        thumb_e++;
+      } else if (this.students[student].thumbValue === 1) {
+        thumb_d++;
+      } else if (this.students[student].thumbValue === 2) {
+        thumb_c++;
+      } else if (this.students[student].thumbValue === 3) {
+        thumb_b++;
+      } else if (this.students[student].thumbValue === 4) {
+        thumb_a++;
+      }
+    }
+    return [thumb_e, thumb_d, thumb_c, thumb_b, thumb_a];
   }
 
   //check if a student is connected

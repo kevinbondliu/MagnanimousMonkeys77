@@ -10,7 +10,7 @@ class PieChart extends React.Component {
         labels: ['I DON\'T GET IT', 'NOT REALLY', 'NEUTRAL', 'I ALMOST GET IT', 'I GOT THIS!'],
         datasets: [
           {
-            data: [5, 10, 8, 7, 9], // this.props.votes
+            data: this.props.thumbVotes, // this.props.votes
             backgroundColor: ['rgba(255, 45, 45, 0.8)', 'rgba(51, 153, 255, 0.8)', 'rgba(255, 255, 102, 0.8)', 'rgba(153, 102, 255, 0.8)', 'rgba(75, 192, 192, 0.8)']
           }
         ]
