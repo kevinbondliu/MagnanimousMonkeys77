@@ -19,6 +19,7 @@ class ThumbsChecker extends React.Component {
 				<ThumbVisualization
 					thumbValue={this.props.thumbValue}
 					thumbVotes={this.props.thumbVotes}
+					changeThumbVotes={this.props.changeThumbVotes}
 				/>
 				{this.props.countdown !== 0
 					? <Countdown

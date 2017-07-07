@@ -21,7 +21,7 @@ class App extends React.Component {
             lectureId: '',
             questionId: '',
             thumbValue: 2,
-            thumbVotes: [1, 6, 10, 5, 7],
+            thumbVotes: [1, 6, 10, 9, 7],
             countdown: 30,
             givenName: '',
             lectureName: 'lobby',

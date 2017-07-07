@@ -203,7 +203,7 @@ io.on('connection', function (socket) {
       //use getVotes and emit votes
       let votes = thumbs.getVotes();
       io.emit('thumbVotes', { thumbVotes: votes });
-      console.log(`sending thumbVotes of ${votes}`);
+      console.log(`-----sending thumbVotes of ${votes}`);
 
       let average = thumbs.getAverageThumbValue();
       io.emit('averageThumbValue', { averageThumbValue: average });

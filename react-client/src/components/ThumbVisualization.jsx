@@ -30,7 +30,7 @@ class ThumbVisualization extends React.Component {
                   </div>
                 </Tab>
                 <Tab eventKey={2} title="Tab 2">
-                  <BarChart thumbVotes={this.props.thumbVotes} width="100" height="50"/>
+                  <BarChart thumbVotes={this.props.thumbVotes} changeThumbVotes={this.props.changeThumbVotes} width="100" height="50"/>
                 </Tab>
                 <Tab eventKey={3} title="Tab 3">
                   <PieChart thumbVotes={this.props.thumbVotes}/>
