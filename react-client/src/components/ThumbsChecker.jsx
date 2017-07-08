@@ -20,7 +20,7 @@ class ThumbsChecker extends React.Component {
                 lectureId: this.props.lectureId
             }
         }).then(result => {
-					var result64 = window.btoa(result.data);
+					var result64 = window.btoa(result.data); 
 					var returnData = 'data:application/octet-stream;charset=utf-16le;base64, ' + result64;
 					this.setState({saveFile: <a className="centersave" href={returnData} >Download Here!</a> })
 				})
