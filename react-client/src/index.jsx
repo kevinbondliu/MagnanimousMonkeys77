@@ -156,6 +156,7 @@ class App extends React.Component {
     }
 
     startMultipleChoice(questionId) {
+      console.log("started multiple choiec HAODHSLD");
         this.setState({
             lectureStatus: 'multipleChoice',
             questionId: questionId
@@ -311,11 +312,13 @@ class App extends React.Component {
                                 : <Instructor
                                     thumbValue={this.state.thumbValue}
                                     thumbVotes={this.state.thumbVotes}
+                                    changeAnswerChoice = {this.changeAnswerChoice.bind(this)}
                                     lectureId={this.state.lectureId}
                                     lectureStatus={this.state.lectureStatus}
                                     startLecture={this.startLecture.bind(this)}
                                     endLecture={this.endLecture.bind(this)}
                                     startThumbsCheck={this.startThumbsCheck.bind(this)}
+                                    startMultipleChoice = {this.startMultipleChoice.bind(this)}
                                     countdown={this.state.countdown}
                                     changeThumbValue={this.changeThumbValue.bind(this)}
                                     changeThumbVotes={this.changeThumbVotes.bind(this)}
