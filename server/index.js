@@ -142,7 +142,7 @@ app.post('/checkthumbs', (req, res) => {
     })
 })
 
-app.post('/multiplechoice', (req, res) => {
+app.post('/multipleChoiceServer', (req, res) => {
   let lecture = req.query.lecture_id;
   db.createNewQuestion(lecture)
     .then((results) => {

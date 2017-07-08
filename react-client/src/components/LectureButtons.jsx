@@ -28,12 +28,13 @@ class LectureButtons extends React.Component {
 		console.log('onMultipleChoice');
 		axios({
 			method: 'post',
-			url: '/multiplechoice',
+			url: '/multipleChoiceServer',
 			params: {
 				lecture_id: this.props.lectureId
 			}
 		}).then((response) => {
 			console.log('multiple choice response', response)
+			this.props.startMultipleChoice(response.data.questionId);
 		}).catch((error) => {
 			console.log(error);
 		})
