@@ -21,6 +21,10 @@ var instructorId = '';  // this will be the socket.id
 
 app.use(express.static(__dirname + '/../react-client/dist'));
 
+app.get('/', function (req, res) {
+  res.sendStatus(200);
+});
+
 app.get('/googleLogin', (req, res) => {
   console.log('this is the req query for google', req.query.role);
   var googleResults;
