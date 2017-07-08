@@ -22,8 +22,9 @@ class BarChart extends React.Component {
       }
     };
 
-
+    var counter = 0;
     socket.on('thumbVotes', (data) => {
+      counter++;
       let storage = this.state.storage;
       let total = this.state.totalVotes;
       //total[thumbVotes.indexOf(1)]++;
@@ -32,10 +33,19 @@ class BarChart extends React.Component {
         console.log('votes', data.thumbVotes);
 
         var temp = [];
+        var ind = data.thumbVotes.indexOf(1);
         for (var i = 0; i < 5; i++) {
-          temp.push(storage[i] + total[i]);
+          temp[i] = storage[i] + total[i];
         }
-        setTimeout(() => { this.setState({storage: temp}) } , 32000);
+
+
+
+        //setTimeout(() => { this.setState({storage: temp}) } , 32000);
+        console.log('counter---', counter);
+        console.log('temp-----', temp);
+        // if (counter === 30) {
+        //   this.setState({storage: temp});
+        // }
 
         this.setState({barChartData: {
         labels: ['I DON\'T GET IT', 'NOT REALLY', 'NEUTRAL', 'I ALMOST GET IT', 'I GOT THIS!'],
