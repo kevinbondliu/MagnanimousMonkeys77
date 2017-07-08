@@ -44,20 +44,20 @@ const writeReport = function(lectureId) {
       report += 'END'
     });
      }).then(()=>{
-       console.log(report);
+       fs.writeFile(`reports/lecture_${lectureId}.txt`, report, function(err){
+          if(err){
+            console.log(err);
+          } else {
+            console.log('Write File Functional');
+          }
+        })
      })
   })
 
 
 })
 
-    // fs.writeFile(`reports/lecture_${lectureId}.txt`, report, function(err){
-    //   if(err){
-    //     console.log(err);
-    //   } else {
-    //     console.log('Write File Functional');
-    //   }
-    // })
+    
 }
 
 module.exports.writeReport = writeReport;
