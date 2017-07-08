@@ -9,7 +9,6 @@ class BarChart extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      storage: [0, 0, 0, 0, 0], //grab storage from db
       totalVotes: [0, 0, 0, 0, 0],
       barChartData: {
         labels: ['I DON\'T GET IT', 'NOT REALLY', 'NEUTRAL', 'I ALMOST GET IT', 'I GOT THIS!'],
@@ -22,37 +21,15 @@ class BarChart extends React.Component {
       }
     };
 
-    var counter = 0;
     socket.on('thumbVotes', (data) => {
-      counter++;
-      let storage = this.state.storage;
-      let total = this.state.totalVotes;
       //total[thumbVotes.indexOf(1)]++;
       this.setState({totalVotes: data.thumbVotes});
-
-        console.log('votes', data.thumbVotes);
-
-        var temp = [];
-        var ind = data.thumbVotes.indexOf(1);
-        for (var i = 0; i < 5; i++) {
-          temp[i] = storage[i] + total[i];
-        }
-
-
-
-        //setTimeout(() => { this.setState({storage: temp}) } , 32000);
-        console.log('counter---', counter);
-        console.log('temp-----', temp);
-        if (counter === 30) {
-          //handle server to insert into db
-          //this.setState({storage: temp});
-        }
-
+        console.log('votes---', data.thumbVotes);
         this.setState({barChartData: {
         labels: ['I DON\'T GET IT', 'NOT REALLY', 'NEUTRAL', 'I ALMOST GET IT', 'I GOT THIS!'],
         datasets: [
           {
-            data: temp, // this.props.votes
+            data: data.thumbVotes, // this.props.votes
             backgroundColor: ['rgba(255, 45, 45, 0.8)', 'rgba(51, 153, 255, 0.8)', 'rgba(255, 255, 102, 0.8)', 'rgba(153, 102, 255, 0.8)', 'rgba(75, 192, 192, 0.8)']
           }
         ]
@@ -81,7 +58,7 @@ class BarChart extends React.Component {
                 labelString: '# of Votes',
                 fontSize: 20
               },
-              ticks: {beginAtZero: true}}]
+              ticks: {beginAtZero: true, suggestedMax: 10}}]
           },
           layout: {
             padding: {
