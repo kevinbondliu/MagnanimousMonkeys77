@@ -19,7 +19,7 @@ class MultipleChoiceVisualization extends React.Component {
   handleSelect(key) {
     this.setState({ key });
   }
-  
+
   getAnswer(event) {
     this.props.changeAnswerChoice(event.target.value);
   }
