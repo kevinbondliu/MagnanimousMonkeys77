@@ -25,7 +25,8 @@ class App extends React.Component {
             countdown: 30,
             givenName: '',
             lectureName: 'lobby',
-            roomChange: ''
+            roomChange: '',
+            answerChoice: ''
         }
         this.role;
     }
@@ -126,6 +127,10 @@ class App extends React.Component {
                 : this.setState({ countdown: this.state.countdown - 1 }, () => {
                     console.log('this.state.countdown', this.state.countdown);
                     if (this.state.view === 'student') {
+                      if(this.state.answerChoice != '') {
+                        console.log('it reached here at answerchoice');
+                        socket.emit('multipleChoiceAnswer', {answerChoice: this.state.answerChoice});
+                      }
                         socket.emit('thumbValue', { thumbValue: this.state.thumbValue });
                     }
                 });
@@ -150,6 +155,13 @@ class App extends React.Component {
         }, this.setCountdownInterval)
     }
 
+    startMultipleChoice(questionId) {
+        this.setState({
+            lectureStatus: 'multipleChoice',
+            questionId: questionId
+        }, this.setCountdownInterval)
+    }
+
     endThumbsCheck() {
         this.setState({
             lectureStatus: 'lectureStarted',
@@ -170,7 +182,6 @@ class App extends React.Component {
             thumbValue: value
         })
     }
-
     changeThumbVotes(votes) {
     	this.setState({
     		thumbVotes: votes
@@ -197,6 +208,13 @@ class App extends React.Component {
     // 	}, 32000);
     // }
 
+    changeAnswerChoice(value) {
+      console.log('this is the value from multiplechoice', value);
+        this.setState({
+            answerChoice: value
+        })
+    }
+  
     signOut() {
         // FB.logout(function(response){
         //   console.lg
@@ -248,23 +266,21 @@ class App extends React.Component {
         return (
             <div>
                 <nav className="navbar navbar-default navbar-static-top">
+                <div className="fb-share-button" data-href="https://pollar-bear.herokuapp.com/" data-layout="button" data-size="large" data-mobile-iframe="true">
+                <a className="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fpollar-bear.herokuapp.com%2F&amp;src=sdkpreparse">Share</a>
+                </div>
                     <div className="container-fluid">
-                        <button href="#" onClick={this.signOut.bind(this)}>
+                        <button className='logout' href="#" onClick={this.signOut.bind(this)}>
                             LogOut!
                         </button>
-                        <form onSubmit={this.handleLectureChange.bind(this)}>
-                            Lecture Name:
-                            <input type="text" ref={(input) => this.input = input} />
-                            <input className="location-submit" type="submit" value="Search for Lecture" />
-                        </form>
-                        <div>{this.state.lectureName}</div>
                         <div className="navbar-header">
                             <a className="navbar-brand">
                                 <i className="fa fa-thumbs-o-up" aria-hidden="true"></i>
-                                &nbsp; Thumblr
+                                Thumblr
                             </a>
                         </div>
                     </div>
+                    
                 </nav>
                 <div className="container-fluid main">
                     {this.state.view === 'roleSelect' ?
@@ -278,9 +294,12 @@ class App extends React.Component {
                             />
                             : this.state.view === 'student'
                                 ? <Student
+                                    answerChoice = {this.state.answerChoice}
+                                    changeAnswerChoice = {this.changeAnswerChoice.bind(this)}
                                     thumbValue={this.state.thumbValue}
                                     changeThumbValue={this.changeThumbValue.bind(this)}
                                     startThumbsCheck={this.startThumbsCheck.bind(this)}
+                                    startMultipleChoice = {this.startMultipleChoice.bind(this)}
                                     startLecture={this.startLecture.bind(this)}
                                     lectureStatus={this.state.lectureStatus}
                                     countdown={this.state.countdown}

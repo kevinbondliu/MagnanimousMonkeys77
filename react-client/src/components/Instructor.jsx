@@ -11,20 +11,20 @@ class Instructor extends React.Component {
     super(props);
     this.state = {};
     console.log('props', props);
+    
     socket.on('averageThumbValue', (data) => {
       if (props.view === 'instructor') {
         //console.log('dataXXX', data);
         props.changeThumbValue(data.averageThumbValue);
       }
-    });
+    })
 
-    // socket.on('thumbVotes', (data) => {
-    //   if (props.view === 'instructor') {
-    //     //make props.changeThumbVotes function // or grab and apss dowwn, invoke in graphs
-    //     console.log('j---------', data);
-    //     props.changeThumbVotes([1, 2, 3, 4, 5]); // data.getVotes
-    //   }
-    // });
+    socket.on('totalAnswers', (data) => {
+      if (props.view === 'instructor') {
+        console.log('data', data);
+      }
+    })
+
   }
 
   render () {

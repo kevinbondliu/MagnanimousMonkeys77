@@ -5,15 +5,34 @@
 .navbar {
   background-color: #0099ff !important;
 }
-
-.navbar * {
-  color: white !important;
+.container-fluid {
+  padding-top: 20px;
 }
 
+.navbar * {
+  color: black !important;
+  font-size: medium;
+}
+.navbar-brand {
+  font-size: x-large;
+  font-family: 'Noto Sans', sans-serif;
+  color: white !important;
+}
+.fa {
+  margin-right: 10px;
+}
+.option {
+  font-size: small;
+}
 .form-control {
   margin-top: 24vh !important;
   padding-top: 18px !important;
   padding-bottom: 18px !important;
+}
+.submitForm {
+  float: right;
+  margin-right: 30px;
+  margin-top: 10px;
 }
 
 .btn {
@@ -23,7 +42,10 @@
   width: 64vw !important;
   margin-top: 24vh !important;
 }
-
+.logout {
+  position: absolute;
+  left: 47.5%;
+}
 .btn-success {
   background-color: limegreen !important;
 }
@@ -55,6 +77,19 @@ p {
 }
 
 .FacebookButton {
-  margin-left: 580px !important;
-  margin-top: 180px !important;
+  position: absolute;
+  top: 50%;
+  left: 42%;
+}
+
+.GoogleButton {
+position: absolute;
+  top: 10%;
+  left: 20%;
+}
+
+.fb-share-button {
+  position: relative;
+  margin-top: 10px;
+  left: 95%;
 }

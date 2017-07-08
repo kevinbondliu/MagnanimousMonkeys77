@@ -1,11 +1,12 @@
 import React from 'react';
 import Waiting from './Waiting.jsx';
 import ThumbInput from './ThumbInput.jsx';
-
+import MultipleChoice from './MultipleChoice.jsx'
 const io = require('socket.io-client');
 const socket = io();
 
-class Student extends React.Component {
+class Student extends React
+.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -17,6 +18,10 @@ class Student extends React.Component {
     socket.on('checkingThumbs', (data) => {
       props.startThumbsCheck(data.questionId);
       //
+    })
+
+    socket.on('multipleChoice', (data) => {
+      props.startMultipleChoice(data.questionId);
     })
 
     socket.on('lectureEnded', (data) => {
@@ -38,10 +43,18 @@ class Student extends React.Component {
             givenName={this.props.givenName}
             lectureName={this.props.lectureName}
           />
-        : <ThumbInput
+        : this.props.lectureStatus === 'checkingThumbs'
+        ?
+            <ThumbInput
             countdown={this.props.countdown}
             thumbValue={this.props.thumbValue}
             changeThumbValue={this.props.changeThumbValue}
+          />
+        :
+          <MultipleChoice
+          countdown={this.props.countdown}
+          answerChoice = {this.props.answerChoice}
+          changeAnswerChoice = {this.props.changeAnswerChoice}
           />}
       </div>
     )
