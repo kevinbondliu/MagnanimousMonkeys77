@@ -17,6 +17,11 @@ class Instructor extends React.Component {
         props.changeThumbValue(data.averageThumbValue);
       }
     });
+    socket.on('totalAnswers', (data) => {
+      if (props.view === 'instructor') {
+        console.log('data', data);
+      }
+    })
   }
 
   render () {

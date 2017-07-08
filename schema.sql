@@ -8,6 +8,7 @@ DROP TABLE if exists users;
 DROP TABLE if exists thumbs;
 DROP TABLE if exists questions;
 DROP TABLE if exists lectures;
+DROP TABLE if exists choice;
 
 CREATE TABLE users (
   id INT NOT NULL AUTO_INCREMENT,
@@ -23,6 +24,11 @@ CREATE TABLE lectures (
   id INT NOT NULL AUTO_INCREMENT,
   name VARCHAR(50) NOT NULL,
   average_thumb_lecture DEC(4,2),
+  answerA INT NOT NULL DEFAULT 0,
+  answerB INT NOT NULL DEFAULT 0,
+  answerC INT NOT NULL DEFAULT 0,
+  answerD INT NOT NULL DEFAULT 0,
+  answerE INT NOT NULL DEFAULT 0,
   PRIMARY KEY (ID)
 );
 
@@ -30,6 +36,11 @@ CREATE TABLE questions (
   id INT NOT NULL AUTO_INCREMENT,
   lecture_id INT NOT NULL,
   average_thumb_question DEC(4,2),
+  answerA INT NOT NULL DEFAULT 0,
+  answerB INT NOT NULL DEFAULT 0,
+  answerC INT NOT NULL DEFAULT 0,
+  answerD INT NOT NULL DEFAULT 0,
+  answerE INT NOT NULL DEFAULT 0,
   PRIMARY KEY (ID)
 );
 
@@ -38,6 +49,15 @@ CREATE TABLE thumbs (
   user_id INT NOT NULL,
   question_id INT NOT NULL,
   thumb_value INT NOT NULL,
+  timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (ID)
+);
+
+CREATE TABLE choice (
+  id INT NOT NULL AUTO_INCREMENT,
+  user_id INT NOT NULL,
+  question_id INT NOT NULL,
+  answer VARCHAR(10) NOT NULL,
   timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (ID)
 );

@@ -24,7 +24,8 @@ class App extends React.Component {
             countdown: 30,
             givenName: '',
             lectureName: 'lobby',
-            roomChange: ''
+            roomChange: '',
+            answerChoice: ''
         }
         this.role;
     }
@@ -125,6 +126,10 @@ class App extends React.Component {
                 : this.setState({ countdown: this.state.countdown - 1 }, () => {
                     console.log('this.state.countdown', this.state.countdown);
                     if (this.state.view === 'student') {
+                      if(this.state.answerChoice != '') {
+                        console.log('it reached here at answerchoice');
+                        socket.emit('multipleChoiceAnswer', {answerChoice: this.state.answerChoice});
+                      }
                         socket.emit('thumbValue', { thumbValue: this.state.thumbValue });
                     }
                 });
@@ -149,6 +154,13 @@ class App extends React.Component {
         }, this.setCountdownInterval)
     }
 
+    startMultipleChoice(questionId) {
+        this.setState({
+            lectureStatus: 'multipleChoice',
+            questionId: questionId
+        }, this.setCountdownInterval)
+    }
+
     endThumbsCheck() {
         this.setState({
             lectureStatus: 'lectureStarted',
@@ -167,6 +179,12 @@ class App extends React.Component {
     changeThumbValue(value) {
         this.setState({
             thumbValue: value
+        })
+    }
+    changeAnswerChoice(value) {
+      console.log('this is the value from multiplechoice', value);
+        this.setState({
+            answerChoice: value
         })
     }
     signOut() {
@@ -248,9 +266,12 @@ class App extends React.Component {
                             />
                             : this.state.view === 'student'
                                 ? <Student
+                                    answerChoice = {this.state.answerChoice}
+                                    changeAnswerChoice = {this.changeAnswerChoice.bind(this)}
                                     thumbValue={this.state.thumbValue}
                                     changeThumbValue={this.changeThumbValue.bind(this)}
                                     startThumbsCheck={this.startThumbsCheck.bind(this)}
+                                    startMultipleChoice = {this.startMultipleChoice.bind(this)}
                                     startLecture={this.startLecture.bind(this)}
                                     lectureStatus={this.state.lectureStatus}
                                     countdown={this.state.countdown}
