@@ -4,7 +4,7 @@ var pool  = mysql.createPool({
   connectionLimit : 10,
   host     : 'localhost',
   user     : 'root',
-  password : '',
+  password : 'plantlife',
   database : 'thumbscheck'
 });
 
@@ -55,6 +55,19 @@ exports.deleteLecture = function(name) {
 exports.lectureExists = function(lectureName) {
   return new Promise ((resolve, reject) => {
     pool.query(`SELECT * FROM LECTURES WHERE NAME = ("${lectureName}")`, (err, results) => {
+      if (err) {
+        console.log(err);
+      } else {
+        resolve(results);
+      }
+    })
+  })
+}
+
+
+exports.getLectureData = function(lectureId){
+  return new Promise ((resolve, reject) => {
+    pool.query(`SELECT * FROM questions WHERE lecture_id = ${lectureId}`, (err, results) => {
       if (err) {
         console.log(err);
       } else {
