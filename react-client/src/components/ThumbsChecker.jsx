@@ -2,11 +2,13 @@ import React from 'react'
 import ThumbVisualization from './ThumbVisualization.jsx';
 import Countdown from './Countdown.jsx';
 import axios from 'axios';
+import $ from 'jquery';
 
 class ThumbsChecker extends React.Component {
 	constructor(props) {
     super(props);
     this.state = {
+			saveFile : ''
     }
 	}
 	
@@ -18,7 +20,14 @@ class ThumbsChecker extends React.Component {
             params: {
                 lectureId: this.props.lectureId
             }
-        })
+        }).then(result => {
+					//var motto = 'data:application/octet-stream, Here We Go!';
+					console.log('test', result);
+					var result64 = window.btoa(result.data);
+					//console.log(result64);
+					var returnData = 'data:application/octet-stream;charset=utf-16le;base64, ' + result64;
+					this.setState({saveFile: <a className="centersave" href={returnData} >Download Here!</a> })
+				})
 		}
 
   
@@ -48,10 +57,11 @@ class ThumbsChecker extends React.Component {
 								Clear Thumbs
 							</div>
 						<div 
-							className="btn btn-lg btn-danger"
+							className="btn btn-lg btn-danger savefile"
 							onClick={function() {saveLecture()}}
 						>Save File</div>
 						</div>}
+						{this.state.saveFile}
 			</div>
 	  )
    }

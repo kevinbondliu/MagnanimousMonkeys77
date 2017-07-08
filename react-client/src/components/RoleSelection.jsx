@@ -20,10 +20,9 @@ class RoleSelection extends React.Component {
   }
 
   render() {
-    var motto = 'data:application/octet-stream, Here We Go!';
+    
     return (
       <div className="col-xs-12 text-center">Select Your Role!
-        <a href={motto} >Test Text</a>
         <div>
           <span>
             <button className='student' value = {'STUDENT'} onClick = {(event) => {this.handleClick(event)}}>Student</button>
