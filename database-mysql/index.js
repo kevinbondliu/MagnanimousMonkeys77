@@ -128,6 +128,17 @@ exports.addAvgThumbForLecture = function(lectureId, avgThumbValue) {
     });
   })
 }
+exports.addMultipleChoiceForLecture = function(lectureId, answerA, answerB, answerC, answerD, answerE){
+  return new Promise ((resolve, reject) => {
+    pool.query(`UPDATE lectures SET answerB=${answerB}, answerB=${answerB}, answerC=${answerC}, answerD=${answerD}, answerE=${answerE} WHERE id=${lectureId}`, (err, results) => {
+      if (err) {
+        console.log(err);
+      } else {
+        resolve(results);
+      }
+    });
+  })
+}
 
 
 
