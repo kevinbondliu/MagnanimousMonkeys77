@@ -7,6 +7,7 @@ class ThumbsChecker extends React.Component {
 	constructor(props) {
     super(props);
     this.state = {
+			saveFile : ''
     }
 	}
 	
@@ -18,7 +19,11 @@ class ThumbsChecker extends React.Component {
             params: {
                 lectureId: this.props.lectureId
             }
-        })
+        }).then(result => {
+					var result64 = window.btoa(result.data); 
+					var returnData = 'data:application/octet-stream;charset=utf-16le;base64, ' + result64;
+					this.setState({saveFile: <a className="centersave" href={returnData} >Download Here!</a> })
+				})
 		}
 
   
@@ -48,10 +53,11 @@ class ThumbsChecker extends React.Component {
 								Clear Thumbs
 							</div>
 						<div 
-							className="btn btn-lg btn-danger"
+							className="btn btn-lg btn-danger savefile"
 							onClick={function() {saveLecture()}}
 						>Save File</div>
 						</div>}
+						{this.state.saveFile}
 			</div>
 	  )
    }

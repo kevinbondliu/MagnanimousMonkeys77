@@ -20,6 +20,7 @@ class RoleSelection extends React.Component {
   }
 
   render() {
+    
     return (
       <div className="col-xs-12 text-center">Select Your Role!
         <div>

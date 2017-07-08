@@ -114,7 +114,11 @@ app.post('/lecture', (req, res) => {
 
 app.post('/saveFile', (req, res) => {
   console.log('Attempting to Save File', req.query.lectureId)
-  reportCard.writeReport(req.query.lectureId);
+  reportCard.writeReport(req.query.lectureId, function(report) {
+    res.write(JSON.stringify(report));
+    res.end();
+  })
+  
 })
 
 app.post('/checkthumbs', (req, res) => {
