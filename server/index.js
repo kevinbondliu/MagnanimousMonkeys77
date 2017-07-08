@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var axios = require('axios');
 var db = require('../database-mysql');
 var google = require('./middleware/googleAuth.js');
+var reportCard = require('./middleware/reportCard.js');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
@@ -104,6 +105,11 @@ app.post('/lecture', (req, res) => {
         lectureName: name
       })
     })
+})
+
+app.post('/saveFile', (req, res) => {
+  console.log('Attempting to Save File', req.query.lectureId)
+  reportCard.writeReport(req.query.lectureId);
 })
 
 app.post('/checkthumbs', (req, res) => {
