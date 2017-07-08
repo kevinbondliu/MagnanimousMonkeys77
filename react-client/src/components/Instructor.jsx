@@ -20,12 +20,6 @@ class Instructor extends React.Component {
       }
     })
 
-    socket.on('totalAnswers', (data) => {
-      if (props.view === 'instructor') {
-        console.log('HERE IS THE DATA data', data);
-      }
-    })
-
   }
 
   render() {
