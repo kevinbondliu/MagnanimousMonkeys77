@@ -2,7 +2,6 @@ import React from 'react'
 import ThumbVisualization from './ThumbVisualization.jsx';
 import Countdown from './Countdown.jsx';
 import axios from 'axios';
-import $ from 'jquery';
 
 class ThumbsChecker extends React.Component {
 	constructor(props) {
@@ -21,10 +20,7 @@ class ThumbsChecker extends React.Component {
                 lectureId: this.props.lectureId
             }
         }).then(result => {
-					//var motto = 'data:application/octet-stream, Here We Go!';
-					console.log('test', result);
 					var result64 = window.btoa(result.data);
-					//console.log(result64);
 					var returnData = 'data:application/octet-stream;charset=utf-16le;base64, ' + result64;
 					this.setState({saveFile: <a className="centersave" href={returnData} >Download Here!</a> })
 				})
