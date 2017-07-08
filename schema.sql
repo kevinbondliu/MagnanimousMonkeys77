@@ -49,6 +49,7 @@ CREATE TABLE thumbs (
   user_id INT NOT NULL,
   question_id INT NOT NULL,
   thumb_value INT NOT NULL,
+  lecture_id INT NOT NULL,
   timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (ID)
 );
@@ -58,6 +59,7 @@ CREATE TABLE choice (
   user_id INT NOT NULL,
   question_id INT NOT NULL,
   answer VARCHAR(10) NOT NULL,
+  lecture_id INT NOT NULL,
   timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (ID)
 );

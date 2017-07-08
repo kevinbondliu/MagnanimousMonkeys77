@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var axios = require('axios');
 var db = require('../database-mysql');
 var google = require('./middleware/googleAuth.js');
+var reportCard = require('./middleware/reportCard.js');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
@@ -107,6 +108,11 @@ app.post('/lecture', (req, res) => {
     })
 })
 
+app.post('/saveFile', (req, res) => {
+  console.log('Attempting to Save File', req.query.lectureId)
+  reportCard.writeReport(req.query.lectureId);
+})
+
 app.post('/checkthumbs', (req, res) => {
   let lecture = req.query.lecture_id;
   db.createNewQuestion(lecture)
@@ -119,7 +125,7 @@ app.post('/checkthumbs', (req, res) => {
       db.asyncTimeout(32000, () => {
         for (let student in thumbs.students) {
           //console.log(`${thumbs.students[student].gmail}, ${thumbs.questionId}, ${thumbs.students[student].thumbValue}`);
-          db.createThumbData(thumbs.students[student].email, thumbs.questionId, thumbs.students[student].thumbValue);
+          db.createThumbData(thumbs.students[student].email, thumbs.questionId, thumbs.students[student].thumbValue, lecture);
         }
         db.addAvgThumbForQuestion(questionId, thumbs.getAverageThumbValue());
       });
@@ -144,7 +150,7 @@ app.post('/multiplechoice', (req, res) => {
         for(let student in answer.students) {
           console.log('student', student);
           console.log('inputvalue', answer.students[student].inputValue, answer.questionId);
-          db.createMultipleChoiceData(answer.students[student].email, answer.questionId, answer.students[student].inputValue);
+          db.createMultipleChoiceData(answer.students[student].email, answer.questionId, answer.students[student].inputValue, lecture);
         }
         var answers = answer.getTotalCount();
         console.log(answers.A, typeof(answers.A))

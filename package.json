@@ -23,6 +23,7 @@
     "css-loader": "^0.28.4",
     "express": "^4.15.0",
     "file-loader": "^0.11.2",
+    "file-system": "^2.2.2",
     "google-auth-library": "^0.10.0",
     "image-webpack-loader": "^3.3.1",
     "jquery": "^3.1.1",
