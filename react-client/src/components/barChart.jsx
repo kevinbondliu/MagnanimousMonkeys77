@@ -9,7 +9,7 @@ class BarChart extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      storage: [1, 2, 3, 4, 5], //grab storage from db
+      storage: [0, 0, 0, 0, 0], //grab storage from db
       totalVotes: [0, 0, 0, 0, 0],
       barChartData: {
         labels: ['I DON\'T GET IT', 'NOT REALLY', 'NEUTRAL', 'I ALMOST GET IT', 'I GOT THIS!'],
@@ -43,9 +43,10 @@ class BarChart extends React.Component {
         //setTimeout(() => { this.setState({storage: temp}) } , 32000);
         console.log('counter---', counter);
         console.log('temp-----', temp);
-        // if (counter === 30) {
-        //   this.setState({storage: temp});
-        // }
+        if (counter === 30) {
+          //handle server to insert into db
+          //this.setState({storage: temp});
+        }
 
         this.setState({barChartData: {
         labels: ['I DON\'T GET IT', 'NOT REALLY', 'NEUTRAL', 'I ALMOST GET IT', 'I GOT THIS!'],
