@@ -173,17 +173,30 @@ exports.createMultipleChoiceData = function(gmail, questionId, answer, lecture) 
   })
 }
 
-exports.getThumbData = function(lectureId) {
-  return new Promise((resolve, reject) => {
-    pool.query(`SELECT * FROM thumbs WHERE lecture_id = ${lectureId} `);
+exports.getThumbData = function(lectureId){
+  return new Promise ((resolve, reject) => {
+    pool.query(`SELECT * FROM thumbs WHERE lecture_id =${lectureId}`, (err, results) => {
+      if (err) {
+        console.log(err);
+      } else {
+        resolve(results);
+      }
+    })
   })
-} 
+}
 
-exports.getChoiceData = function(lectureId) {
-  return new Promise((resolve, reject) => {
-    pool.query(`SELECT * FROM choice WHERE lecture_id = ${lectureId} `);
+
+exports.getChoiceData = function(lectureId){
+  return new Promise ((resolve, reject) => {
+    pool.query(`SELECT * FROM choice WHERE lecture_id =${lectureId}`, (err, results) => {
+      if (err) {
+        console.log(err);
+      } else {
+        resolve(results);
+      }
+    })
   })
-} 
+}
 
 exports.getUserId = function(gmail) {
   return new Promise ((resolve, reject) => {
