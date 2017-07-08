@@ -21,6 +21,7 @@ class App extends React.Component {
             lectureId: '',
             questionId: '',
             thumbValue: 2,
+            thumbVotes: [1, 6, 10, 9, 7],
             countdown: 30,
             givenName: '',
             lectureName: 'lobby',
@@ -181,12 +182,39 @@ class App extends React.Component {
             thumbValue: value
         })
     }
+    changeThumbVotes(votes) {
+    	this.setState({
+    		thumbVotes: votes
+    	})
+    }
+
+    // calculateAllVotes(oneVote) {
+    // 	//oneVote is an array [0,0,1,0,0]
+
+    //   let totalVotes = [0, 0, 0, 0, 0];
+    //   let index = oneVote.indexOf(1);
+    //   totalVotes[index]++;
+    //   //return totalVotes;
+    //     setTimeout(() => {
+    //     this.setState({      barChartData: {
+    //     labels: ['I DON\'T GET IT', 'NOT REALLY', 'NEUTRAL', 'I ALMOST GET IT', 'I GOT THIS!'],
+    //     datasets: [
+    //       {
+    //         data: thumbVotes, // this.props.votes
+    //         backgroundColor: ['rgba(255, 45, 45, 0.8)', 'rgba(51, 153, 255, 0.8)', 'rgba(255, 255, 102, 0.8)', 'rgba(153, 102, 255, 0.8)', 'rgba(75, 192, 192, 0.8)']
+    //       }
+    //     ]
+    //   }})
+    // 	}, 32000);
+    // }
+
     changeAnswerChoice(value) {
       console.log('this is the value from multiplechoice', value);
         this.setState({
             answerChoice: value
         })
     }
+  
     signOut() {
         // FB.logout(function(response){
         //   console.lg
@@ -282,6 +310,7 @@ class App extends React.Component {
                                 />
                                 : <Instructor
                                     thumbValue={this.state.thumbValue}
+                                    thumbVotes={this.state.thumbVotes}
                                     lectureId={this.state.lectureId}
                                     lectureStatus={this.state.lectureStatus}
                                     startLecture={this.startLecture.bind(this)}
@@ -289,6 +318,7 @@ class App extends React.Component {
                                     startThumbsCheck={this.startThumbsCheck.bind(this)}
                                     countdown={this.state.countdown}
                                     changeThumbValue={this.changeThumbValue.bind(this)}
+                                    changeThumbVotes={this.changeThumbVotes.bind(this)}
                                     clearThumbsCheck={this.clearThumbsCheck.bind(this)}
                                     view={this.state.view}
                                     givenName={this.state.givenName}

@@ -17,6 +17,7 @@ class Student extends React
 
     socket.on('checkingThumbs', (data) => {
       props.startThumbsCheck(data.questionId);
+      //
     })
 
     socket.on('multipleChoice', (data) => {
