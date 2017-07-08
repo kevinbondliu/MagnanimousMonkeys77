@@ -1,5 +1,5 @@
 import React from 'react';
-import BarChart from './BarChart.jsx';
+import BarChart from './barChart.jsx';
 import PieChart from './PieChart.jsx';
 import { Tabs, Tab } from 'react-bootstrap';
 

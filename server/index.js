@@ -9,7 +9,7 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 //var data = require('./middleware/thumbsData.js');
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 server.listen(port);
 
@@ -20,6 +20,10 @@ var answer = '';
 var instructorId = '';  // this will be the socket.id
 
 app.use(express.static(__dirname + '/../react-client/dist'));
+
+app.get('/', function (req, res) {
+  res.sendStatus(200);
+});
 
 app.get('/googleLogin', (req, res) => {
   console.log('this is the req query for google', req.query.role);
