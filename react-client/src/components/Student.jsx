@@ -55,6 +55,7 @@ class Student extends React
           countdown={this.props.countdown}
           answerChoice = {this.props.answerChoice}
           changeAnswerChoice = {this.props.changeAnswerChoice}
+          view = {this.props.view}
           />}
       </div>
     )
