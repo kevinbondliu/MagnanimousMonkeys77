@@ -1,8 +1,4 @@
-DROP DATABASE IF EXISTS thumbscheck;
-
-CREATE DATABASE IF NOT EXISTS thumbscheck;
-
-USE thumbscheck;
+USE heroku_fc95cb920993d85;
 
 DROP TABLE if exists users;
 DROP TABLE if exists thumbs;
