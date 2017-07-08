@@ -148,9 +148,9 @@ exports.getAvgThumbsForQuestionsInLecture = function(lectureId) {
 /* Section
 */
 
-exports.createThumbData = function(gmail, questionId, thumbsValue) {
+exports.createThumbData = function(gmail, questionId, thumbsValue, lecture) {
   return new Promise ((resolve, reject) => {
-    pool.query(`INSERT INTO thumbs (user_id, question_id, thumb_value) VALUES ((SELECT id FROM users WHERE gmail="${gmail}"), ${questionId}, ${thumbsValue})`, (err, results) => {
+    pool.query(`INSERT INTO thumbs (user_id, question_id, thumb_value, lecture_id) VALUES ((SELECT id FROM users WHERE gmail="${gmail}"), ${questionId}, ${thumbsValue}, ${lecture})`, (err, results) => {
       if (err) {
         console.log(err);
       } else {
@@ -160,9 +160,9 @@ exports.createThumbData = function(gmail, questionId, thumbsValue) {
   })
 }
 
-exports.createMultipleChoiceData = function(gmail, questionId, answer) {
+exports.createMultipleChoiceData = function(gmail, questionId, answer, lecture) {
   return new Promise ((resolve, reject) => {
-    pool.query(`INSERT INTO choice (user_id, question_id, answer) VALUES ((SELECT id FROM users WHERE gmail= ?), ?, ?)`,[gmail,questionId,answer],(err, results) => {
+    pool.query(`INSERT INTO choice (user_id, question_id, answer, lecture_id) VALUES ((SELECT id FROM users WHERE gmail= ?), ?, ?, ?)`,[gmail,questionId,answer, lecture],(err, results) => {
       if (err) {
         console.log(err);
       } else {
@@ -173,6 +173,17 @@ exports.createMultipleChoiceData = function(gmail, questionId, answer) {
   })
 }
 
+exports.getThumbData = function(lectureId) {
+  return new Promise((resolve, reject) => {
+    pool.query(`SELECT * FROM thumbs WHERE lecture_id = ${lectureId} `);
+  })
+} 
+
+exports.getChoiceData = function(lectureId) {
+  return new Promise((resolve, reject) => {
+    pool.query(`SELECT * FROM choice WHERE lecture_id = ${lectureId} `);
+  })
+} 
 
 exports.getUserId = function(gmail) {
   return new Promise ((resolve, reject) => {

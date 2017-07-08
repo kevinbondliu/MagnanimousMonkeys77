@@ -2,8 +2,7 @@ const fs = require('file-system');
 var db = require('../../database-mysql');
 
 const writeReport = function(lectureId) {
-  var report = 'All Your Base Are Belong to Us';
-  console.log('Capitan, here!');
+  var report = '';
   db.getLectureData(lectureId).
   then((results) => {
     console.log(results);
