@@ -1,7 +1,7 @@
 const fs = require('file-system');
 var db = require('../../database-mysql');
 
-const writeReport = function(lectureId) {
+const writeReport = function(lectureId, callback) {
   var report = `Lecture ID: ${lectureId}\n`;
   report += `**************************************************************** \n`;
   db.getLectureData(lectureId).
@@ -42,15 +42,19 @@ const writeReport = function(lectureId) {
        Answer: ${thumb.thumb_value}\n
       `
       report += 'END'
+      return report;
     });
      }).then(()=>{
-       fs.writeFile(`reports/lecture_${lectureId}.txt`, report, function(err){
-          if(err){
-            console.log(err);
-          } else {
-            console.log('Write File Functional');
-          }
-        })
+       console.log(report);
+       callback(report);
+       return report;
+      //  fs.writeFile(`reports/lecture_${lectureId}.txt`, report, function(err){
+      //     if(err){
+      //       console.log(err);
+      //     } else {
+      //       console.log('Write File Functional');
+      //     }
+      //   })
      })
   })
 

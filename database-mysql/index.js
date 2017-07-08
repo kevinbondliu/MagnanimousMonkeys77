@@ -3,10 +3,10 @@ var mysql = require('mysql');
 var pool  = mysql.createPool({
   connectionLimit : 10,
 
-  host     : 'us-cdbr-iron-east-03.cleardb.net',
-  user     : 'bf9d0cb2681794',
-  password : '3e16431b',
-  database : 'heroku_fc95cb920993d85'
+  host     : 'us-cdbr-iron-east-03.cleardb.net' || 'localhost',
+  user     : 'bf9d0cb2681794' || 'root',
+  password : '3e16431b' || 'plantlife',
+  database : 'heroku_fc95cb920993d85' || 'thumbscheck'
 });
 
 

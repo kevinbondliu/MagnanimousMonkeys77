@@ -1,0 +1,98 @@
+Lecture ID: 3
+**************************************************************** 
+Lecture Summary 
+
+      Question # 1
+
+      Average Thumb Data: 4
+
+      # of A: 0
+
+      # of B: 0
+
+      # of C: 0
+
+      # of D: 0
+
+      # of E: 0
+
+      
+      Question # 2
+
+      Average Thumb Data: null
+
+      # of A: 0
+
+      # of B: 0
+
+      # of C: 0
+
+      # of D: 0
+
+      # of E: 0
+
+      
+      Question # 3
+
+      Average Thumb Data: 0
+
+      # of A: 0
+
+      # of B: 0
+
+      # of C: 0
+
+      # of D: 0
+
+      # of E: 0
+
+      
+      Question # 4
+
+      Average Thumb Data: 3
+
+      # of A: 0
+
+      # of B: 0
+
+      # of C: 0
+
+      # of D: 0
+
+      # of E: 0
+
+      **************************************************************** 
+ USER CHOICE DATA: 
+
+      Question: 10
+
+      USER: 9 
+
+      Answer: A
+
+       USER CHOICE DATA: 
+
+      Question: 12
+
+      USER: 9 
+
+      Answer: A
+
+      **************************************************************** 
+USER THUMB DATA: 
+
+       Question: 9
+
+       USER: 9 
+
+       Answer: 4
+
+      ENDUSER THUMB DATA: 
+
+       Question: 11
+
+       USER: 9 
+
+       Answer: 0
+
+      END
