@@ -149,6 +149,7 @@ app.post('/multiplechoice', (req, res) => {
         var answers = answer.getTotalCount();
         console.log(answers.A, typeof(answers.A))
         db.addMultipleChoiceForQuestion(questionId, answers.A, answers.B, answers.C, answers.D, answers.E)
+        db.addMultipleChoiceForLecture(questionId, answers.A, answers.B, answers.C, answers.D, answers.E)
       });
 
       res.send({questionId: questionId});
