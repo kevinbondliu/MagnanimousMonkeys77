@@ -1,24 +1,10 @@
 import React from 'react';
-// import BarChart from './BarChart.jsx';
-// import PieChart from './PieChart.jsx';
-// import { Tabs, Tab } from 'react-bootstrap';
-
 
 class ThumbVisualizationStudent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {}
     }
-
-    // getInitialState() {
-    //     return {
-    //         key: 1
-    //     };
-    // }
-
-    // handleSelect(key) {
-    //     this.setState({ key });
-    // }
 
     render() {
         return (
