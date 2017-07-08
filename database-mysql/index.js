@@ -2,10 +2,11 @@ var mysql = require('mysql');
 
 var pool  = mysql.createPool({
   connectionLimit : 10,
-  host     : 'localhost',
-  user     : 'root',
-  password : '',
-  database : 'thumbscheck'
+
+  host     : 'us-cdbr-iron-east-03.cleardb.net',
+  user     : 'bf9d0cb2681794',
+  password : '3e16431b',
+  database : 'heroku_fc95cb920993d85'
 });
 
 
