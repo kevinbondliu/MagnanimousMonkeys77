@@ -1,5 +1,5 @@
 import React from 'react';
-import ThumbVisualization from './ThumbVisualization.jsx';
+import ThumbVisualizationStudent from './ThumbVisualizationStudent.jsx';
 import Countdown from './Countdown.jsx';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
@@ -32,7 +32,7 @@ class ThumbInput extends React.Component {
             />
           </div>
           <div className="col-xs-4">
-            <ThumbVisualization
+            <ThumbVisualizationStudent
               thumbValue={this.props.thumbValue}
             />
           </div>
