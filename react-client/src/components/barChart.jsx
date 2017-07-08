@@ -21,20 +21,49 @@ class BarChart extends React.Component {
       }
     };
 
+    var selectedThumbs = false;
+
     socket.on('thumbVotes', (data) => {
-      //total[thumbVotes.indexOf(1)]++;
-      this.setState({totalVotes: data.thumbVotes});
-        console.log('votes---', data.thumbVotes);
-        this.setState({barChartData: {
-        labels: ['I DON\'T GET IT', 'NOT REALLY', 'NEUTRAL', 'I ALMOST GET IT', 'I GOT THIS!'],
-        datasets: [
-          {
-            data: data.thumbVotes, // this.props.votes
-            backgroundColor: ['rgba(255, 45, 45, 0.8)', 'rgba(51, 153, 255, 0.8)', 'rgba(255, 255, 102, 0.8)', 'rgba(153, 102, 255, 0.8)', 'rgba(75, 192, 192, 0.8)']
-          }
-        ]
-      }})
+      selectedThumbs = true;
+      if (selectedThumbs) {
+        this.setState({totalVotes: data.thumbVotes});
+          console.log('Thumbs data BAR', data.thumbVotes);
+          this.setState({barChartData: {
+          labels: ['I DON\'T GET IT', 'NOT REALLY', 'NEUTRAL', 'I ALMOST GET IT', 'I GOT THIS!'],
+          datasets: [
+            {
+              data: data.thumbVotes, // this.props.votes
+              backgroundColor: ['rgba(255, 45, 45, 0.8)', 'rgba(51, 153, 255, 0.8)', 'rgba(255, 255, 102, 0.8)', 'rgba(153, 102, 255, 0.8)', 'rgba(75, 192, 192, 0.8)']
+            }
+          ]
+        }})
+      }
     });
+
+    socket.on('totalAnswers', (data) => {
+       if (selectedThumbs === false) {
+        var votes = data.getTotalCount;
+        var choices = [];
+        for (var options in votes) {
+          choices.push(votes[options]);
+        }
+        console.log('Choices data BAR', choices);
+
+        this.setState({totalVotes: data.thumbVotes});
+          console.log('Thumbs data BAR', data.thumbVotes);
+          this.setState({barChartData: {
+          labels: ['I DON\'T GET IT', 'NOT REALLY', 'NEUTRAL', 'I ALMOST GET IT', 'I GOT THIS!'],
+          datasets: [
+            {
+              data: choices, // this.props.votes
+              backgroundColor: ['rgba(255, 45, 45, 0.8)', 'rgba(51, 153, 255, 0.8)', 'rgba(255, 255, 102, 0.8)', 'rgba(153, 102, 255, 0.8)', 'rgba(75, 192, 192, 0.8)']
+            }
+          ]
+        }})
+
+       }
+    });
+
   }
 
   render() {

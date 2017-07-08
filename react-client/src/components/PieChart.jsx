@@ -9,7 +9,6 @@ class PieChart extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      storage: [1, 2, 3, 4, 5], //grab storage from db
       totalVotes: [0, 0, 0, 0, 0],
       pieChartData: {
         labels: ['I DON\'T GET IT', 'NOT REALLY', 'NEUTRAL', 'I ALMOST GET IT', 'I GOT THIS!'],
@@ -22,30 +21,49 @@ class PieChart extends React.Component {
       }
     };
 
-      socket.on('thumbVotes', (data) => {
-      let storage = this.state.storage;
-      let total = this.state.totalVotes;
-      //total[thumbVotes.indexOf(1)]++;
-      this.setState({totalVotes: data.thumbVotes});
+    var selectedThumbs = false;
 
-        console.log('votes', data.thumbVotes);
-
-        var temp = [];
-        for (var i = 0; i < 5; i++) {
-          temp.push(storage[i] + total[i]);
-        }
-        setTimeout(() => { this.setState({storage: temp}) } , 32000);
-
-        this.setState({barChartData: {
+    socket.on('thumbVotes', (data) => {
+      selectedThumbs = true;
+      if (selectedThumbs) {
+        this.setState({totalVotes: data.thumbVotes});
+        console.log('Thumbs data PIE', data.thumbVotes);
+        this.setState({pieChartData: {
         labels: ['I DON\'T GET IT', 'NOT REALLY', 'NEUTRAL', 'I ALMOST GET IT', 'I GOT THIS!'],
         datasets: [
           {
-            data: temp, // this.props.votes
+            data: data.thumbVotes, // this.props.votes
             backgroundColor: ['rgba(255, 45, 45, 0.8)', 'rgba(51, 153, 255, 0.8)', 'rgba(255, 255, 102, 0.8)', 'rgba(153, 102, 255, 0.8)', 'rgba(75, 192, 192, 0.8)']
           }
         ]
-      }})
+        }})
+      }
     });
+
+      socket.on('totalAnswers', (data) => {
+       if (selectedThumbs === false) {
+        var votes = data.getTotalCount;
+        var choices = [];
+        for (var options in votes) {
+          choices.push(votes[options]);
+        }
+        console.log('Choices data PIE', choices);
+
+        this.setState({totalVotes: data.thumbVotes});
+          console.log('Thumbs data BAR', data.thumbVotes);
+          this.setState({pieChartData: {
+          labels: ['I DON\'T GET IT', 'NOT REALLY', 'NEUTRAL', 'I ALMOST GET IT', 'I GOT THIS!'],
+          datasets: [
+            {
+              data: choices, // this.props.votes
+              backgroundColor: ['rgba(255, 45, 45, 0.8)', 'rgba(51, 153, 255, 0.8)', 'rgba(255, 255, 102, 0.8)', 'rgba(153, 102, 255, 0.8)', 'rgba(75, 192, 192, 0.8)']
+            }
+          ]
+        }})
+
+       }
+    });
+
   }
 
   render() {
