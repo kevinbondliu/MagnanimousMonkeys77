@@ -134,7 +134,7 @@ class App extends React.Component {
                         socket.emit('thumbValue', { thumbValue: this.state.thumbValue });
                     }
                 });
-        }, 500)
+        }, 1000)
     }
 
     clearCountdownInterval() {
