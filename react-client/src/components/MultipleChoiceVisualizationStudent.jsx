@@ -53,32 +53,6 @@ class MultipleChoiceVisualizationStudent extends React.Component {
         this.setState(check);
       }
     }
-
-    // if (input === 'A') {
-    //   this.setState({
-    //     checked1: true
-    //   })
-    // }
-    // if (input === 'B') {
-    //   this.setState({
-    //     checked1: true
-    //   })
-    // }
-    // if (input === 'C') {
-    //   this.setState({
-    //     checked1: true
-    //   })
-    // }
-    // if (input === 'D') {
-    //   this.setState({
-    //     checked1: true
-    //   })
-    // }
-    // if (input === 'E') {
-    //   this.setState({
-    //     checked1: true
-    //   })
-    // }
   }
 
   render() {
