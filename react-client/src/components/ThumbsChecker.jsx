@@ -12,7 +12,6 @@ class ThumbsChecker extends React.Component {
 	}
 	
 	saveFile() {
-		console.log('Up and running, Capitan', this.props.lectureId);
 		axios({
             method: 'post',
             url: '/saveFile',
@@ -25,8 +24,6 @@ class ThumbsChecker extends React.Component {
 					this.setState({saveFile: <a className="centersave" href={returnData} >Download Here!</a> })
 				})
 		}
-
-  
 
 	render () {
 		var saveLecture = this.saveFile.bind(this); 

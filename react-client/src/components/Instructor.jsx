@@ -50,6 +50,7 @@ class Instructor extends React.Component {
                 countdown={this.props.countdown}
                 answerChoice={this.props.answerChoice}
                 changeAnswerChoice={this.props.changeAnswerChoice}
+                clearThumbsCheck={this.props.clearThumbsCheck}
               />}
       </div>
     )

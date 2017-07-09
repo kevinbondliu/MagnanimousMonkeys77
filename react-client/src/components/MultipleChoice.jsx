@@ -30,7 +30,18 @@ class MultipleChoice extends React.Component {
           />
           }
         </div>
-        <Countdown countdown={this.props.countdown} />
+        {this.props.countdown !== 0
+					? <Countdown
+							countdown={this.props.countdown}
+						/>
+					: <div className="col-xs-12 text-center">
+						<div
+								className="btn btn-lg btn-danger"
+								onClick={this.props.clearThumbsCheck}
+							>
+								Clear Choices
+							</div>
+						</div>}
       </div>
     )
   }
