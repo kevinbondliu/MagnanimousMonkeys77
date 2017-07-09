@@ -48,6 +48,7 @@ class PieChart extends React.Component {
           choices.push(votes[options]);
         }
         //console.log('Choices data PIE', choices);
+        choices = choices.reverse();
 
         this.setState({totalVotes: data.thumbVotes});
           console.log('Thumbs data BAR', data.thumbVotes);

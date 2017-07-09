@@ -131,6 +131,7 @@ class App extends React.Component {
                         console.log('it reached here at answerchoice');
                         socket.emit('multipleChoiceAnswer', {answerChoice: this.state.answerChoice});
                       }
+
                         socket.emit('thumbValue', { thumbValue: this.state.thumbValue });
                     }
                 });
@@ -215,7 +216,7 @@ class App extends React.Component {
             answerChoice: value
         })
     }
-  
+
     signOut() {
         // FB.logout(function(response){
         //   console.lg
@@ -281,7 +282,7 @@ class App extends React.Component {
                             </a>
                         </div>
                     </div>
-                    
+
                 </nav>
                 <div className="container-fluid main">
                     {this.state.view === 'roleSelect' ?
