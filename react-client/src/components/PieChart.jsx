@@ -27,7 +27,7 @@ class PieChart extends React.Component {
       selectedThumbs = true;
       if (selectedThumbs) {
         this.setState({totalVotes: data.thumbVotes});
-        console.log('Thumbs data PIE', data.thumbVotes);
+        //console.log('Thumbs data PIE', data.thumbVotes);
         this.setState({pieChartData: {
         labels: ['I DON\'T GET IT', 'NOT REALLY', 'NEUTRAL', 'I ALMOST GET IT', 'I GOT THIS!'],
         datasets: [
@@ -47,7 +47,8 @@ class PieChart extends React.Component {
         for (var options in votes) {
           choices.push(votes[options]);
         }
-        console.log('Choices data PIE', choices);
+        //console.log('Choices data PIE', choices);
+        choices = choices.reverse();
 
         this.setState({totalVotes: data.thumbVotes});
           console.log('Thumbs data BAR', data.thumbVotes);

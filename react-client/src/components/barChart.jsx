@@ -11,7 +11,7 @@ class BarChart extends React.Component {
     this.state = {
       totalVotes: [0, 0, 0, 0, 0],
       barChartData: {
-        labels: ['I DON\'T GET IT', 'NOT REALLY', 'NEUTRAL', 'I ALMOST GET IT', 'I GOT THIS!'],
+        labels: ['', '', '', '', ''],
         datasets: [
           {
             data: this.props.thumbVotes, // this.props.votes
@@ -27,7 +27,7 @@ class BarChart extends React.Component {
       selectedThumbs = true;
       if (selectedThumbs) {
         this.setState({totalVotes: data.thumbVotes});
-          console.log('Thumbs data BAR', data.thumbVotes);
+          //console.log('Thumbs data BAR', data.thumbVotes);
           this.setState({barChartData: {
           labels: ['I DON\'T GET IT', 'NOT REALLY', 'NEUTRAL', 'I ALMOST GET IT', 'I GOT THIS!'],
           datasets: [
@@ -47,12 +47,13 @@ class BarChart extends React.Component {
         for (var options in votes) {
           choices.push(votes[options]);
         }
-        console.log('Choices data BAR', choices);
+        //console.log('Choices data BAR', choices);
+        choices = choices.reverse();
 
         this.setState({totalVotes: data.thumbVotes});
           console.log('Thumbs data BAR', data.thumbVotes);
           this.setState({barChartData: {
-          labels: ['I DON\'T GET IT', 'NOT REALLY', 'NEUTRAL', 'I ALMOST GET IT', 'I GOT THIS!'],
+          labels: ['A', 'B', 'C', 'D', 'E'],
           datasets: [
             {
               data: choices, // this.props.votes
@@ -60,7 +61,6 @@ class BarChart extends React.Component {
             }
           ]
         }})
-
        }
     });
 
@@ -74,7 +74,7 @@ class BarChart extends React.Component {
         options={{
           title: {
             display: true,
-            text: "Thumbs Range",
+            text: "Student Votes",
             fontSize: 25
           },
           legend: {
