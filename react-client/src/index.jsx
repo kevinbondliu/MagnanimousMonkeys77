@@ -229,6 +229,7 @@ class App extends React.Component {
         this.setState({
             view: 'roleSelect'
         })
+        window.location.reload();
     }
 
     changeLecture(lectureName) {
