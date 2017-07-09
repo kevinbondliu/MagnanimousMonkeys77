@@ -127,12 +127,13 @@ class App extends React.Component {
                 : this.setState({ countdown: this.state.countdown - 1 }, () => {
                     console.log('this.state.countdown', this.state.countdown);
                     if (this.state.view === 'student') {
-                      if(this.state.answerChoice != '') {
+                      if(this.state.lectureStatus === 'multipleChoice') {
                         console.log('it reached here at answerchoice');
                         socket.emit('multipleChoiceAnswer', {answerChoice: this.state.answerChoice});
                       }
-
+                      if(this.state.lectureStatus === 'checkingThumbs') {
                         socket.emit('thumbValue', { thumbValue: this.state.thumbValue });
+                      }
                     }
                 });
         }, 1000)
