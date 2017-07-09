@@ -4,7 +4,23 @@ import axios from 'axios';
 class LectureButtons extends React.Component {
 	constructor (props) {
 		super(props);
-		this.state = {};
+		this.state = {
+			saveFile : ''
+		};
+	}
+
+	saveFile() {
+		axios({
+            method: 'post',
+            url: '/saveFile',
+            params: {
+                lectureId: this.props.lectureId
+            }
+        }).then(result => {
+					var result64 = window.btoa(result.data); 
+					var returnData = 'data:application/octet-stream;charset=utf-16le;base64, ' + result64;
+					this.setState({saveFile: <a href={returnData} >Download Here!</a> })
+				})
 	}
 
   onThumbsCheck () {
@@ -41,6 +57,7 @@ class LectureButtons extends React.Component {
 	}
 
 	render () {
+		var saveLecture = this.saveFile.bind(this); 
 		return (
 			<div className="row">
 				<div className="col-xs-12 text-center">
@@ -63,6 +80,13 @@ class LectureButtons extends React.Component {
 						onClick={this.props.endLecture}>
 						End Lecture
 					</div>
+				</div>
+				<div className="col-xs-12 text-center"> 
+				<div 
+							className="btn btn-lg btn-danger savefile"
+							onClick={function() {saveLecture()}}
+						>Save File</div>
+					{this.state.saveFile}
 				</div>
 		  </div>
 		)
